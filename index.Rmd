@@ -1,0 +1,163 @@
+---
+title       : Twitter-based Alerts of Major Disasters
+subtitle    : Biomedical Big Data Seminar
+author      : Rachael A. Callcut, MD, MSPH &amp; Sara E. Moore, MA
+date        : 13 November 2017
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: ["default", "custom.css"]
+    nature:
+      highlightStyle: tomorrow-night-eighties # arta, ascetic, dark, default, far, github, googlecode, idea, ir_black, magula, monokai, rainbow, solarized-dark, solarized-light, sunburst, tomorrow, tomorrow-night-blue, tomorrow-night-bright, tomorrow-night, tomorrow-night-eighties, vs, zenburn
+      highlightLines: true
+---
+
+```{r knitr_setup, echo=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 6,
+					  dpi = 300, fig.cap="", fig.align='center')
+showtext::showtext_opts(dpi = 300)
+```
+
+```{r loadbib, echo=FALSE, cache=FALSE}
+library(RefManageR)
+bib = ReadBib("references.bib", check = FALSE)
+BibOptions(check.entries = FALSE, style = "markdown",
+		   cite.style = "authoryear", bib.style = "numeric")
+```
+
+
+# How to access these slides
+
+### Via git:
+
+```{bash, eval=FALSE}
+git clone https://github.com/saraemoore/TwitterTraumaBBD2017.git
+```
+
+### Download directly:
+https://github.com/saraemoore/TwitterTraumaBBD2017/archive/master.zip
+
+### View online:
+http://saraemoore.github.io/TwitterTraumaBBD2017
+
+???
+
+* I won't be showing all the code on the slides today, but it's all available in the R Markdown document used to create these slides in this repository on github, or in the corresponding R script that's also in the github repository.
+
+---
+
+# Content
+
+* Lots of slides will go here
+
+---
+
+# The paper
+
+<!--
+<sup>1</sup>
+-->
+
+* See `r TextCite(bib, "twittertrauma2017")`
+
+<!--
+.footnote[1: `r TextCite(bib, "twittertrauma2017")`]
+-->
+
+---
+
+# Related work
+
+* From Alan: `r TextCite(bib, "twitterdengue2017")`
+* In dropbox folder:
+    * `r TextCite(bib, "houstonetal2015")`
+    * `r TextCite(bib, "sewolferry2015")`
+    * `r TextCite(bib, "japanearthquake2014")`
+    * `r TextCite(bib, "spatiotemporal2014")`
+    * `r TextCite(bib, "bostonbombing2015")`
+
+---
+
+class: fullscreen, middle, center
+
+```{r dt0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
+library(DT)
+dont_show_cols = which(grepl("^gho|^publish",
+							 colnames(who_cbdr)))
+datatable(who_cbdr[,-dont_show_cols],
+		  caption = "Global population rates in 2013 per 1,000 population",
+		  rownames = FALSE,
+		  colnames = c("World Bank Income Group" = 2,
+		  			   "Crude birth rate" = 5,
+		  			   "Crude death rate" = 6),
+		  options = list(pageLength = 5,
+		  				 lengthMenu = c(5, 10, 15)))
+```
+
+---
+
+class: fullscreen, middle, center
+
+```{r simple_leaflet0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
+library(leaflet)
+
+df = data.frame(name = "University Hall",
+				lat = 37.8719032,
+				long = -122.2664164)
+
+leaflet(df) %>%
+	addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+	setView(-122.2585399, 37.8718992, zoom = 16) %>%
+	addCircleMarkers(~long, ~lat, popup = ~name)
+```
+
+```{r fancy_leaflet0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
+pal = colorNumeric(palette = "plasma",
+                   domain = yll_bycondition$value)
+
+yll_bycondition$popup_label = paste0(yll_bycondition$country, ": ",
+                                     yll_bycondition$value, "%")
+
+leaflet(yll_bycondition) %>%
+    addProviderTiles(providers$CartoDB.DarkMatter) %>%
+    addCircleMarkers(lng = ~longitude, lat = ~latitude,
+                     popup = ~popup_label,
+                     color = ~pal(value), fillColor = ~pal(value)) %>%
+    addLegend("bottomright", pal = pal, values = ~value,
+              title = "Population's<br/>years of life lost<br/>to communicable<br/>& other group I<br/>conditions",
+              labFormat = labelFormat(suffix = "%"), opacity = 0.8)
+```
+
+---
+class: inverse, middle, center
+
+# Questions?
+
+---
+
+# References
+
+```{r printbib, results="asis", echo=FALSE, cache=FALSE}
+PrintBibliography(bib, .opts = list(check.entries = FALSE, sorting = "ynt", no.print.fields = c("doi")))
+```
+
+---
+
+# Credits
+
+#### Built using [xaringan](https://github.com/yihui/xaringan) with
++ [knitr](http://yihui.name/knitr),
++ [R Markdown](https://rmarkdown.rstudio.com),
++ the [remark.js](https://github.com/gnab/remark/) framework,
++ the [RefManageR](https://github.com/ropensci/RefManageR/) bibliography manager, and
++ the [highlight.js](https://highlightjs.org/) syntax highlighter.
+
+---
+
+# Session Info
+
+```{r sessionInfo, results="markup", echo=FALSE, message=FALSE, warning=FALSE}
+library(pander)
+pander(sessionInfo(), locale = FALSE, compact = TRUE)
+```
