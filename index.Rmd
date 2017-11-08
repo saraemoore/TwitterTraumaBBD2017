@@ -47,12 +47,6 @@ http://saraemoore.github.io/TwitterTraumaBBD2017
 
 ---
 
-# Content
-
-* Lots of slides will go here
-
----
-
 # The paper
 
 <!--
@@ -79,20 +73,59 @@ http://saraemoore.github.io/TwitterTraumaBBD2017
 
 ---
 
+# Objectives
+
+Use real-time social media data to:
+
+* detect mass-casualty incidents and/or
+* predict location-specific trauma center volume.
+
+Goal: to build an early warning system for trauma centers.
+
+???
+
+WHO: MCI = an event which generates more patients at one time than locally available resources can manage using routine procedures.
+
+---
+
+# Data
+
+* Pilot analysis: Historical Twitter data on
+  * Asiana Airlines crash at SFO (Jul 2013, $n \approx 400$k),
+  * South Napa earthquake (Aug 2014, $n \approx 200$k),
+  * Boston Marathon bombing (Apr 2013, $n \approx 1.1$ mil),
+  * Marysville Pilchuck High School shooting (Oct 2014, $n \approx 250$k), and
+    * Sandy Hook Elementary School shooting (Dec 2012, $n \approx 1.8$ mil).
+* Early 2016: collected add'l data via streaming API.
+
+???
+
+Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
+
+---
+
+# Exploratory Analyses
+
+<!--
+[Link](file:///Users/fpgcdi/Dropbox/Trauma\ and\ Coagulation\ \(White\ Space\ Conflict\)/Twitter/prelim_analysis/index.html)
+-->
+
+---
+
 class: fullscreen, middle, center
 
 ```{r dt0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
 library(DT)
 dont_show_cols = which(grepl("^gho|^publish",
-							 colnames(who_cbdr)))
+               colnames(who_cbdr)))
 datatable(who_cbdr[,-dont_show_cols],
-		  caption = "Global population rates in 2013 per 1,000 population",
-		  rownames = FALSE,
-		  colnames = c("World Bank Income Group" = 2,
-		  			   "Crude birth rate" = 5,
-		  			   "Crude death rate" = 6),
-		  options = list(pageLength = 5,
-		  				 lengthMenu = c(5, 10, 15)))
+      caption = "Global population rates in 2013 per 1,000 population",
+      rownames = FALSE,
+      colnames = c("World Bank Income Group" = 2,
+               "Crude birth rate" = 5,
+               "Crude death rate" = 6),
+      options = list(pageLength = 5,
+               lengthMenu = c(5, 10, 15)))
 ```
 
 ---
@@ -103,13 +136,13 @@ class: fullscreen, middle, center
 library(leaflet)
 
 df = data.frame(name = "University Hall",
-				lat = 37.8719032,
-				long = -122.2664164)
+        lat = 37.8719032,
+        long = -122.2664164)
 
 leaflet(df) %>%
-	addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
-	setView(-122.2585399, 37.8718992, zoom = 16) %>%
-	addCircleMarkers(~long, ~lat, popup = ~name)
+  addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+  setView(-122.2585399, 37.8718992, zoom = 16) %>%
+  addCircleMarkers(~long, ~lat, popup = ~name)
 ```
 
 ```{r fancy_leaflet0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
@@ -128,6 +161,95 @@ leaflet(yll_bycondition) %>%
               title = "Population's<br/>years of life lost<br/>to communicable<br/>& other group I<br/>conditions",
               labFormat = labelFormat(suffix = "%"), opacity = 0.8)
 ```
+
+---
+
+# Acquiring Twitter data
+
+* [Twitter's REST APIs](https://dev.twitter.com/rest/public)
+    - Conduct singular searches, read user profile information, or post Tweets.
+  - Most common: [Twitter Search API](https://dev.twitter.com/rest/public/search)
+      - Limitations: [Rate limited](https://dev.twitter.com/rest/public/rate-limits) (max number of queries every 15 mins), max 100 tweets returned per query, only past 7 days, may not be complete
+* [Twitter's Streaming API](https://dev.twitter.com/streaming/overview)
+    - Monitor or process Tweets in real-time.
+    - Most common: [Public streams](https://dev.twitter.com/streaming/public) &rarr; [POST statuses/filter](https://dev.twitter.com/streaming/reference/post/statuses/filter)
+      - Returns public statuses that match one or more filter predicates.
+      - Limitations: one connection at a time allowed per account, subject to streaming cap (max out at small percentage of total tweet volume), frequent reconnects may result in rate limiting/brief IP blocking
+
+---
+
+# Acquiring Twitter data, continued
+
+* [Gnip](https://gnip.com/) (now owned by Twitter)
+    - Costs &#36;&#36;&#36;
+    - Realtime
+        - Most common: [PowerTrack](https://gnip.com/realtime/powertrack/): filtered firehose
+    - Historical
+        - [Historical PowerTrack](http://support.gnip.com/code/historical_powertrack.html): RESTful version of PowerTrack
+        - [30-Day Search API](https://gnip.com/historical/30-day-search/)
+        - [Full Archive Search API](https://gnip.com/historical/full-archive-search/)
+
+???
+
+As of April, 2015, 'firehose' access is cut off for all third-party resellers. Now it all goes through Gnip, which was acquired by Twitter in May, 2014. ([1](http://www.forbes.com/sites/benkepes/2015/04/11/how-to-kill-your-ecosystem-twitter-pulls-an-evil-move-with-its-firehose/), [2](http://thenextweb.com/dd/2015/04/11/twitter-cuts-off-firehose-resellers-as-it-brings-data-access-fully-in-house/), [3](http://www.infoworld.com/article/2908869/big-data/twitters-firehose-shut-off-is-the-newest-hazard-of-the-api-economy.html))
+
+---
+
+# Processing Twitter data
+
+- In R: See CRAN's ["Web Technologies" package collection](https://cran.r-project.org/web/views/WebTechnologies.html), particularly the "parsing Data from the Web" and "social media" sections
+- Not in R: Twitter's list of tools for [other programming languages](https://dev.twitter.com/overview/api/twitter-libraries)
+
+---
+
+# Processing Twitter data in R
+
+.pull-left[
+
+* Parsing JSON (javascript object notation) files:
+  * [rjson](https://cran.r-project.org/web/packages/rjson/index.html),
+  * [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html), and
+  * **[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)**.
+* Reading from REST APIs:
+    * **twitteR** ([CRAN](https://cran.r-project.org/web/packages/twitteR/index.html)/[github](https://github.com/geoffjentry/twitteR))
+    * [RTwitterAPI](https://github.com/joyofdata/RTwitterAPI)
+* Reading from Streaming API:
+    * **streamR** ([CRAN](https://cran.r-project.org/web/packages/streamR/index.html)/[github](https://github.com/pablobarbera/streamR))
+    * tweet2r ([CRAN](https://cran.r-project.org/web/packages/tweet2r/index.html)/[github](https://github.com/pauarago/tweet2r))
+
+]
+
+.pull-right[
+
+* Authenticating via OAuth:
+    * ROAuth ([CRAN](https://cran.r-project.org/web/packages/ROAuth/index.html)/[github](https://github.com/geoffjentry/ROAuth))
+* Other Resources:
+   * Workshop materials and slides: [Analyzing and Collecting Social Media Data with R](https://github.com/pablobarbera/social-media-workshop)
+
+]
+
+---
+
+# Visualization
+
+.pull-left[
+
+[htmlwidgets](http://www.htmlwidgets.org/) (interactive JavaScript-based graphics from within R):
+* [sparkline](https://github.com/htmlwidgets/sparkline) for small inline Tufte-style plots
+* [DT](http://rstudio.github.io/DT/) (aka DataTables)
+* [dygraphs](https://rstudio.github.io/dygraphs/) for time series
+* [streamgraph](http://hrbrmstr.github.io/streamgraph/), also for time series
+* [leaflet](https://rstudio.github.io/leaflet/) for mapping
+* etc.
+
+]
+
+.pull-right[
+
+* Use with [R Markdown](http://rmarkdown.rstudio.com) or [Shiny](http://shiny.rstudio.com/)
+* **[Gallery of htmlwidgets](http://hafen.github.io/htmlwidgetsgallery/)**
+
+]
 
 ---
 class: inverse, middle, center
