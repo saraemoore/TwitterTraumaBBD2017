@@ -43,6 +43,13 @@ Web Grey: #888888
   display: none;
 }
 
+.remark-slide-number {
+  color: #B9D3B6;  /* sather gate */
+  font-size: 10pt;
+  opacity: 1; /* default: 0.5 */
+  margin-bottom: -10px;
+}
+
 .remark-fading { z-index: 9; }
 .remark-slide-container {transition: opacity 0.25s ease-out;opacity: 0;}
 .remark-visible {transition: opacity 0.25s ease-out;opacity: 1;}
@@ -103,7 +110,7 @@ blockquote {
   padding: 0.25em 0.25em;
 }
 a, a > code {
-  color: #00A598; /* laplane */
+  color: #00A598; /* lap lane */
 }
 .footnote {
   padding-right: 3em;
@@ -121,4 +128,33 @@ a, a > code {
 }
 th, td {
   border-bottom: 1px solid #ddd;
+}
+.large {
+  font-size: 130%;
+}
+.smaller {
+  font-size: 85%;
+}
+.small {
+  font-size: 70%;
+}
+div.my-footer {
+  background-color: #46535E; /* pacific */
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 20px;
+  width: 100%;
+  padding: 2px;
+}
+div.my-footer span {
+  font-size: 10pt;
+  color: #B9D3B6;  /* sather gate */
+  position: absolute;
+  left: 15px;
+  bottom: 2px;
+}
+div.my-footer a {
+  color: #B9D3B6; /* sather gate */
+  text-decoration: none; /* turns off background coloring of links */
 }

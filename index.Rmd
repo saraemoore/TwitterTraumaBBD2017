@@ -11,6 +11,7 @@ output:
     nature:
       highlightStyle: tomorrow-night-eighties # arta, ascetic, dark, default, far, github, googlecode, idea, ir_black, magula, monokai, rainbow, solarized-dark, solarized-light, sunburst, tomorrow, tomorrow-night-blue, tomorrow-night-bright, tomorrow-night, tomorrow-night-eighties, vs, zenburn
       highlightLines: true
+      countIncrementalSlides: false
 ---
 
 ```{r knitr_setup, echo=FALSE}
@@ -39,11 +40,21 @@ git clone https://github.com/saraemoore/TwitterTraumaBBD2017.git
 https://github.com/saraemoore/TwitterTraumaBBD2017/archive/master.zip
 
 ### View online:
-http://saraemoore.github.io/TwitterTraumaBBD2017
+http://www.saraemoore.com/TwitterTraumaBBD2017
 
 ???
 
 * I won't be showing all the code on the slides today, but it's all available in the R Markdown document used to create these slides in this repository on github, or in the corresponding R script that's also in the github repository.
+
+---
+
+layout: true
+
+<div class="my-footer"><span><a href="http://www.saraemoore.com/TwitterTraumaBBD2017">github:saraemoore/TwitterTraumaBBD2017</a></span></div>
+
+<!--
+  https://git.io/vFEx0
+-->
 
 ---
 
@@ -53,7 +64,8 @@ http://saraemoore.github.io/TwitterTraumaBBD2017
 <sup>1</sup>
 -->
 
-* See `r TextCite(bib, "twittertrauma2017")`
+* See `r TextCite(bib, "twittertrauma2017")`, "Finding the Signal in the Noise: Could Social Media Be Utilized for Early Hospital Notification of Multiple Casualty Events?"
+* Collaboration between UC Berkeley and UCSF/SF General Hospital &amp; Trauma Center
 
 <!--
 .footnote[1: `r TextCite(bib, "twittertrauma2017")`]
@@ -102,6 +114,256 @@ WHO: MCI = an event which generates more patients at one time than locally avail
 
 Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
 
+
+---
+
+# July 6, 2013
+
+- Asiana Flight 214
+- Boeing 777-200 ER
+- Incheon, South Korea
+- 307 persons aboard
+    - 291 passengers
+    - 16 crew
+    - 70 Children
+
+---
+
+# "11:27 am Plane crash"
+
+- 1st official airport notification
+    "Code 33: Plane down"
+- 1 hospital notice police officer in ED
+- Confusing initial information:
+    - 'small cargo plane'
+    - 'large cargo plane'
+    - 'commercial jet liner'
+    - 'Everyone is okay'
+
+---
+
+# What do we do?
+
+- Watch the news?
+- Check the internet?
+- Wait for the 'official notification' to prepare?
+- Don't worry about it?
+
+> "Effective disaster communication may prevent a disaster or lessen its impact, whereas ineffective disaster communication may cause a disaster or make its effects worse." &mdash; .small[`r TextCite(bib, "houstonetal2015", .opts = list(max.names = 1))`]
+
+---
+
+# Instantaneous News
+
+- 1st Twitter message/photo **30 seconds** after impact
+- Retweeted 4,450 times in first 24 hours
+
+---
+
+# Our society is leaving behind a digital footprint.
+
+---
+
+# A Glimpse Into the Digital Footprint
+
+Every minute:
+-  204 million emails sent
+-  1.8 million Facebook likes
+-  278,000 Tweets
+-  200,000 Facebook photos uploaded
+
+---
+
+# The ability to hear the signal in the noise is the key...
+
+---
+
+# Has it been used before???
+
+- Twitter -- microblogging
+    - two-way communication
+- Used to track non-disaster public health events
+
+---
+
+# How about for Disasters???
+
+- Primarily to deliver information
+    - 2009 Taiwan typhoon
+    - 2010 Haiti earthquake
+    - 2011 Egyptian uprising
+
+- Fed agencies
+    - FEMA
+    - National Weather Service
+    - US Government (2010)
+
+---
+
+# Hypothesis
+
+- Twitter feeds could be used to develop a prospective multiple casualty warning signal for hospital based activation
+
+---
+
+# Methods
+
+- Historical Retrospective Analysis
+    - Develop the Early Warning Signal from 5 recent U.S. Multiple Casualty Incidents
+
+- Prospective Test of the Signal Thresholds
+    - Super Bowl 50 (San Francisco 2016)
+
+---
+
+# Developing the Signal
+
+- Acquired post hoc from Twitter via Gnip's Historical PowerTrack
+    - data was *purchased* from the Twitter Corp.
+- 100% capture based on key words
+- Complete tweet content: tweet text, user information, geocoding, structure, # of user's followers, retweets, & timing
+
+---
+
+# MCI Events
+
+> "A mass casualty incident is defined as an event which generates more patients at one time than locally available resources can manage using routine procedures. It requires exceptional emergency arrangements and additional or extraordinary assistance." &mdash; .small[`r TextCite(bib, "whomci2007")`]
+
+- Event initiation $\rightarrow$ 7 days post-event
+- Event initiation times:
+    - Sandy Hook: Dec 14, 2012 @ 9:35:00 EST
+    (time of first 911 calls)
+    - Boston Bombing: April 15, 2013 @ 14:49:00 EDT
+    (detonation time of first bomb)
+    - SF Asiana 214: July 6, 2013 @ 11:28:00 PDT
+    (seawall impact time)
+    - Napa Earthquake: Aug 24, 2014 @ 03:20:44 PDT
+    (earthquake origin time)
+    - Marysville School Shooting: Oct 24, 2014 @ 10:39:00 PDT
+    (time of first 911 call)
+
+---
+
+# Acquiring Twitter data
+
+* [Twitter's REST APIs](https://dev.twitter.com/rest/public)
+    - Conduct singular searches, read user profile information, or post Tweets.
+  - Most common: [Twitter Search API](https://dev.twitter.com/rest/public/search)
+      - Limitations: [Rate limited](https://dev.twitter.com/rest/public/rate-limits) (max number of queries every 15 mins), max 100 tweets returned per query, only past 7 days, may not be complete
+* [Twitter's Streaming API](https://dev.twitter.com/streaming/overview)
+    - Monitor or process Tweets in real-time.
+    - Most common: [Public streams](https://dev.twitter.com/streaming/public) &rarr; [POST statuses/filter](https://dev.twitter.com/streaming/reference/post/statuses/filter)
+      - Returns public statuses that match one or more filter predicates.
+      - Limitations: one connection at a time allowed per account, subject to streaming cap (max out at small percentage of total tweet volume), frequent reconnects may result in rate limiting/brief IP blocking
+
+---
+
+# Acquiring Twitter data, continued
+
+* [Gnip](https://gnip.com/) (now owned by Twitter)
+    - Costs &#36;&#36;&#36;
+    - Realtime
+        - Most common: [PowerTrack](https://gnip.com/realtime/powertrack/): filtered firehose
+    - Historical
+        - [Historical PowerTrack](http://support.gnip.com/code/historical_powertrack.html): RESTful version of PowerTrack
+        - [30-Day Search API](https://gnip.com/historical/30-day-search/)
+        - [Full Archive Search API](https://gnip.com/historical/full-archive-search/)
+
+???
+
+As of April, 2015, 'firehose' access is cut off for all third-party resellers. Now it all goes through Gnip, which was acquired by Twitter in May, 2014. ([1](http://www.forbes.com/sites/benkepes/2015/04/11/how-to-kill-your-ecosystem-twitter-pulls-an-evil-move-with-its-firehose/), [2](http://thenextweb.com/dd/2015/04/11/twitter-cuts-off-firehose-resellers-as-it-brings-data-access-fully-in-house/), [3](http://www.infoworld.com/article/2908869/big-data/twitters-firehose-shut-off-is-the-newest-hazard-of-the-api-economy.html))
+
+---
+
+# Keywords for multiple casualty events
+
+.smaller[
+
+Disaster Event                                | Search Terms
+--------------------------------------------- | ---------------------------------------------
+Sandy Hook Elementary School shooting (SH)    | School (gunman OR 'Sandy Hook' OR victims OR shooting OR Newtown)
+                                              | Newtown (shooting OR gunman OR student OR Sandy Hook OR elementary)
+Boston Marathon bombing (BB)                  | Bomb (Boston OR marathon OR explosion OR terrorist OR finish line)
+                                              | Boston (explosion OR terrorist)
+Asiana Airlines crash (SF)                    | Plane (crash OR SFO OR runway OR San Francisco OR Asiana OR '214')
+                                              | Asiana (Crash OR '214' OR Runway OR SFO OR San Francisco)
+South Napa earthquake (NE)                    | Earthquake (San Francisco OR 'sf' OR Napa OR '6.0')
+Marysville Pilchuck High School shooting (MV) | School (gunman OR Marysville OR victims OR shooting OR Washington)
+                                              | Marysville (shooting OR gunman OR student)
+]
+
+---
+
+# Processing Twitter data
+
+- In R: See CRAN's ["Web Technologies" package collection](https://cran.r-project.org/web/views/WebTechnologies.html), particularly the "parsing Data from the Web" and "social media" sections
+- Not in R: Twitter's list of tools for [other programming languages](https://dev.twitter.com/overview/api/twitter-libraries)
+
+---
+
+# Processing Twitter data in R
+
+.pull-left[
+
+* Parsing JSON (javascript object notation) files:
+  * [rjson](https://cran.r-project.org/web/packages/rjson/index.html),
+  * [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html), and
+  * **[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)**.
+* Reading from REST APIs:
+    * **twitteR** ([CRAN](https://cran.r-project.org/web/packages/twitteR/index.html)/[github](https://github.com/geoffjentry/twitteR))
+    * [RTwitterAPI](https://github.com/joyofdata/RTwitterAPI)
+* Reading from Streaming API:
+    * **streamR** ([CRAN](https://cran.r-project.org/web/packages/streamR/index.html)/[github](https://github.com/pablobarbera/streamR))
+    * tweet2r ([CRAN](https://cran.r-project.org/web/packages/tweet2r/index.html)/[github](https://github.com/pauarago/tweet2r))
+
+]
+
+.pull-right[
+
+* Authenticating via OAuth:
+    * ROAuth ([CRAN](https://cran.r-project.org/web/packages/ROAuth/index.html)/[github](https://github.com/geoffjentry/ROAuth))
+* Other Resources:
+   * Workshop materials and slides: [Analyzing and Collecting Social Media Data with R](https://github.com/pablobarbera/social-media-workshop)
+
+]
+
+---
+
+# Analysis
+
+- Mostly qualitative, with objective of identifying similarities across events
+
+---
+
+# Disaster Signal
+
+- Differing tweet per minute thresholds were compared to:
+    - County disaster notification time (if a county disaster page was activated)
+    - Hospital stand by notification times (if no county disaster page was performed)
+    - Patient arrival times (obtained from after action reports).
+
+---
+
+# Results
+
+- 3.8 million tweets
+    - SH: 1,815,751
+    - BB: 1,147,793
+    - SF: 430,616
+    - NE: 205,073
+    - MV: 249,847
+- 45% original tweets, 55% retweets
+- Retweets mean of 82-564 times per event
+- Mean followers 3382-9992 across events
+
+---
+
+# Signal Threshold
+
+- 200 tweets per minute?
+- Initiated before patient arrival to local hospitals*
+- Preceded traditional disaster notification and hospital standby notices in SF and NE, and followed within 2 mins in BB & MV
+
 ---
 
 # Exploratory Analyses
@@ -112,6 +374,11 @@ Observations summarized here include only those with a `postedTime` after the ev
 
 ---
 
+# Tool for Location
+
+---
+
+layout: false
 class: fullscreen, middle, center
 
 ```{r dt0, out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE, eval=FALSE}
@@ -164,75 +431,17 @@ leaflet(yll_bycondition) %>%
 
 ---
 
-# Acquiring Twitter data
+layout: true
 
-* [Twitter's REST APIs](https://dev.twitter.com/rest/public)
-    - Conduct singular searches, read user profile information, or post Tweets.
-  - Most common: [Twitter Search API](https://dev.twitter.com/rest/public/search)
-      - Limitations: [Rate limited](https://dev.twitter.com/rest/public/rate-limits) (max number of queries every 15 mins), max 100 tweets returned per query, only past 7 days, may not be complete
-* [Twitter's Streaming API](https://dev.twitter.com/streaming/overview)
-    - Monitor or process Tweets in real-time.
-    - Most common: [Public streams](https://dev.twitter.com/streaming/public) &rarr; [POST statuses/filter](https://dev.twitter.com/streaming/reference/post/statuses/filter)
-      - Returns public statuses that match one or more filter predicates.
-      - Limitations: one connection at a time allowed per account, subject to streaming cap (max out at small percentage of total tweet volume), frequent reconnects may result in rate limiting/brief IP blocking
-
----
-
-# Acquiring Twitter data, continued
-
-* [Gnip](https://gnip.com/) (now owned by Twitter)
-    - Costs &#36;&#36;&#36;
-    - Realtime
-        - Most common: [PowerTrack](https://gnip.com/realtime/powertrack/): filtered firehose
-    - Historical
-        - [Historical PowerTrack](http://support.gnip.com/code/historical_powertrack.html): RESTful version of PowerTrack
-        - [30-Day Search API](https://gnip.com/historical/30-day-search/)
-        - [Full Archive Search API](https://gnip.com/historical/full-archive-search/)
-
-???
-
-As of April, 2015, 'firehose' access is cut off for all third-party resellers. Now it all goes through Gnip, which was acquired by Twitter in May, 2014. ([1](http://www.forbes.com/sites/benkepes/2015/04/11/how-to-kill-your-ecosystem-twitter-pulls-an-evil-move-with-its-firehose/), [2](http://thenextweb.com/dd/2015/04/11/twitter-cuts-off-firehose-resellers-as-it-brings-data-access-fully-in-house/), [3](http://www.infoworld.com/article/2908869/big-data/twitters-firehose-shut-off-is-the-newest-hazard-of-the-api-economy.html))
-
----
-
-# Processing Twitter data
-
-- In R: See CRAN's ["Web Technologies" package collection](https://cran.r-project.org/web/views/WebTechnologies.html), particularly the "parsing Data from the Web" and "social media" sections
-- Not in R: Twitter's list of tools for [other programming languages](https://dev.twitter.com/overview/api/twitter-libraries)
-
----
-
-# Processing Twitter data in R
-
-.pull-left[
-
-* Parsing JSON (javascript object notation) files:
-  * [rjson](https://cran.r-project.org/web/packages/rjson/index.html),
-  * [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html), and
-  * **[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)**.
-* Reading from REST APIs:
-    * **twitteR** ([CRAN](https://cran.r-project.org/web/packages/twitteR/index.html)/[github](https://github.com/geoffjentry/twitteR))
-    * [RTwitterAPI](https://github.com/joyofdata/RTwitterAPI)
-* Reading from Streaming API:
-    * **streamR** ([CRAN](https://cran.r-project.org/web/packages/streamR/index.html)/[github](https://github.com/pablobarbera/streamR))
-    * tweet2r ([CRAN](https://cran.r-project.org/web/packages/tweet2r/index.html)/[github](https://github.com/pauarago/tweet2r))
-
-]
-
-.pull-right[
-
-* Authenticating via OAuth:
-    * ROAuth ([CRAN](https://cran.r-project.org/web/packages/ROAuth/index.html)/[github](https://github.com/geoffjentry/ROAuth))
-* Other Resources:
-   * Workshop materials and slides: [Analyzing and Collecting Social Media Data with R](https://github.com/pablobarbera/social-media-workshop)
-
-]
+<div class="my-footer"><span><a href="http://www.saraemoore.com/TwitterTraumaBBD2017">github:saraemoore/TwitterTraumaBBD2017</a></span></div>
 
 ---
 
 # Visualization
 
 .pull-left[
+
+ggplot2, of course
 
 [htmlwidgets](http://www.htmlwidgets.org/) (interactive JavaScript-based graphics from within R):
 * [sparkline](https://github.com/htmlwidgets/sparkline) for small inline Tufte-style plots
@@ -252,7 +461,53 @@ As of April, 2015, 'firehose' access is cut off for all third-party resellers. N
 ]
 
 ---
-class: inverse, middle, center
+
+# Prospective Testing of Signal
+
+.pull-left[
+- Super Bowl 50
+- Prospective API using generic search terms
+- one or more of the generic terms plus a location or event term
+- 2 week time period
+- Moving Average calculated
+]
+
+.pull-right[
+.smaller[
+- **'Event' keywords:** breaking, news, breakingnews, cnn, pray, crash, shot, shooting, stab, stabbed, stabbing, fall, dead, died, accident, earthquake, flood, victim, victims, fatality, fatalities, attack
+- **'Location' keywords:** sf, sanfrancisco, san, francisco, sanfran, prayforsanfrancisco, bayarea, sfbayarea, bay, sanfranciscobay, northerncalifornia, norcal, california, ca, sfgh, zfgh, thegeneral, general, goldengatebridge, goldengate, bridge, baybridge, bart, caltrain, muni, cablecar
+]
+]
+
+???
+
+A prospective API (R-based application program interface) was then constructed using generic search terms for potential multiple casualty events and was prospectively used to gather data from Twitter via their API. key words were developed by studying both the most frequently used hashtags and keywords common across the five previously analyzed events ("breakingnews", "cnn", "pray", etc.) and by utilizing knowledge of locally relevant hashtags and keywords ("sf", "sfgh", "zfgh", "thegeneral", etc.).
+
+---
+
+# SB 50: Gathered >55 mil tweets
+
+No signal activation even during the height of the Super Bowl activities
+
+---
+
+# Unexpected Event
+
+No signal activation for a High Profile, but low casualty event
+
+---
+
+# Conclusions
+
+- Rapid use and scalability
+- Geographic term included
+- Proof of Concept Study
+- Powerful, predictable, and potentially important resource for optimizing disaster response
+- Leverage advanced analytics for prospective monitoring
+
+---
+layout: false
+class: inverse, fullscreen, middle, center
 
 # Questions?
 
@@ -260,9 +515,13 @@ class: inverse, middle, center
 
 # References
 
+.small[
+
 ```{r printbib, results="asis", echo=FALSE, cache=FALSE}
 PrintBibliography(bib, .opts = list(check.entries = FALSE, sorting = "ynt", no.print.fields = c("doi")))
 ```
+
+]
 
 ---
 
