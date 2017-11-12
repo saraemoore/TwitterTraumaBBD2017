@@ -45,6 +45,11 @@ http://www.saraemoore.com/TwitterTraumaBBD2017
 * I won't be showing all the code on the slides today, but it's all available in the R Markdown document used to create these slides in this repository on github, or in the corresponding R script that's also in the github repository.
 
 ---
+class: inverse, fullscreen, middle, center
+
+&gt; "A mass casualty incident is defined as an event which generates more patients at one time than locally available resources can manage using routine procedures. It requires exceptional emergency arrangements and additional or extraordinary assistance." &amp;mdash; .small[&lt;a name=cite-whomci2007&gt;&lt;/a&gt;[WHO (2007)](http://www.who.int/iris/handle/10665/43804)]
+
+---
 
 layout: true
 
@@ -56,67 +61,9 @@ layout: true
 
 ---
 
-# The paper
-
-&lt;!--
-&lt;sup&gt;1&lt;/sup&gt;
---&gt;
-
-* See &lt;a name=cite-twittertrauma2017&gt;&lt;/a&gt;[Callcut, Moore, Wakam, Hubbard, and Cohen (2017)](https://doi.org/10.1371/journal.pone.0186118), "Finding the Signal in the Noise: Could Social Media Be Utilized for Early Hospital Notification of Multiple Casualty Events?"
-* Collaboration between UC Berkeley and UCSF/SF General Hospital &amp;amp; Trauma Center
-
-&lt;!--
-.footnote[1: [Callcut, Moore, Wakam, et al. (2017)](https://doi.org/10.1371/journal.pone.0186118)]
---&gt;
-
----
-
-# Related work
-
-* From Alan: &lt;a name=cite-twitterdengue2017&gt;&lt;/a&gt;[Marques-Toledo, Degener, Vinhal, Coelho, Meira, Codeço, and Teixeira (2017)](https://doi.org/10.1371/journal.pntd.0005729)
-* In dropbox folder:
-    * &lt;a name=cite-houstonetal2015&gt;&lt;/a&gt;[Houston, Hawthorne, Perreault, Park, Goldstein Hode, Halliwell, Turner McGowen, Davis, Vaid, McElderry, and Griffith (2015)](http://dx.doi.org/10.1111/disa.12092)
-    * &lt;a name=cite-sewolferry2015&gt;&lt;/a&gt;[Woo, Cho, Shim, Lee, and Song (2015)](https://doi.org/10.3390/ijerph120910974)
-    * &lt;a name=cite-japanearthquake2014&gt;&lt;/a&gt;[Jung and Moro (2014)](http://dx.doi.org/10.1111/disa.12071)
-    * &lt;a name=cite-spatiotemporal2014&gt;&lt;/a&gt;[Cheng and Wicks (2014)](https://doi.org/10.1371/journal.pone.0097807)
-    * &lt;a name=cite-bostonbombing2015&gt;&lt;/a&gt;[Sutton, Gibson, Spiro, League, Fitzhugh, and Butts (2015)](https://doi.org/10.1371/journal.pone.0134452)
-
----
-
-# Objectives
-
-Use real-time social media data to:
-
-* detect mass-casualty incidents and/or
-* predict location-specific trauma center volume.
-
-Goal: to build an early warning system for trauma centers.
-
-???
-
-WHO: MCI = an event which generates more patients at one time than locally available resources can manage using routine procedures.
-
----
-
-# Data
-
-* Pilot analysis: Historical Twitter data on
-  * Asiana Airlines crash at SFO (Jul 2013, `\(n \approx 400\)`k),
-  * South Napa earthquake (Aug 2014, `\(n \approx 200\)`k),
-  * Boston Marathon bombing (Apr 2013, `\(n \approx 1.1\)` mil),
-  * Marysville Pilchuck High School shooting (Oct 2014, `\(n \approx 250\)`k), and
-    * Sandy Hook Elementary School shooting (Dec 2012, `\(n \approx 1.8\)` mil).
-* Early 2016: collected add'l data via streaming API.
-
-???
-
-Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
-
-
----
-
 # July 6, 2013
 
+.left-column[
 - Asiana Flight 214
 - Boeing 777-200 ER
 - Incheon, South Korea
@@ -125,20 +72,42 @@ Observations summarized here include only those with a `postedTime` after the ev
     - 16 crew
     - 70 Children
 
+]
+
+.right-column[
+
+![:scale 60%](assets/img/image3.jpg)
+
+![:scale 90%](assets/img/image4.jpg)
+]
+
 ---
 
-# "11:27 am Plane crash"
+# "11:28 am Plane crash"
 
-- 1st official airport notification
-    "Code 33: Plane down"
-- 1 hospital notice police officer in ED
+- 1st official airport notification: "Code 33: Plane down"
+- 1st hospital notice: police officer in ED
 - Confusing initial information:
     - 'small cargo plane'
     - 'large cargo plane'
     - 'commercial jet liner'
     - 'Everyone is okay'
 
+.pull-left-wide[
+![](assets/img/image5.png)
+]
+
+.pull-right-wide[
+![](assets/img/sfocrash_after.jpg)
+]
+
+???
+
+In the SF Asiana airplane crash, the vast majority of the early information from the event was erroneous. 'Disaster myths' are harmful and they can alter the way a community responds to an event. Although people do not intend to mislead, disasters are emotional, making perception of facts often skewed.
+
 ---
+
+
 
 # What do we do?
 
@@ -149,96 +118,175 @@ Observations summarized here include only those with a `postedTime` after the ev
 
 &gt; "Effective disaster communication may prevent a disaster or lessen its impact, whereas ineffective disaster communication may cause a disaster or make its effects worse." &amp;mdash; .small[[Houston, et al. (2015)](http://dx.doi.org/10.1111/disa.12092)]
 
+???
+
+Communications in times of mass casualty events, especially those involving natural disasters, have always posed challenges. In nearly every after action report, communication is cited as the most common entity needing improvements
+
 ---
 
 # Instantaneous News
 
+.pull-left-wide[
+![:scale 98%](assets/img/instant_news2.jpg)
+]
+
+.pull-right-wide[
+![:scale 98%](assets/img/instant_news1.jpg)
+]
+
+
+
+&lt;!--
+
 - 1st Twitter message/photo **30 seconds** after impact
 - Retweeted 4,450 times in first 24 hours
 
----
+    https://www.usatoday.com/story/news/nation/2013/07/07/social-media-asiana-airlines-tweets-david-eun-twitter-tweets/2496903/
+--&gt;
 
-# Our society is leaving behind a digital footprint.
+???
 
----
-
-# A Glimpse Into the Digital Footprint
-
-Every minute:
--  204 million emails sent
--  1.8 million Facebook likes
--  278,000 Tweets
--  200,000 Facebook photos uploaded
+The difficulty for hospital based providers in the age of widespread availability of social media is trying to wade through the enormous amount of information that flows almost instantaneously following these events. This information nearly always precedes the activation of any formal notification process and we believe that social media as a form of non-traditional data has great potential to provide an opportunity to improve early warning of impending need to respond to mass or multiple casualty events. As an example, the county wide disaster page activation occurred nearly 30 minutes later then information appeared on social media feeds following the crash of a commercial jet liner in San Francisco with over 300 potentially injured occupants. In fact, the first tweet of a plane down occurred 30 seconds after the crash and preceded even the 911 calls. Drawing on the experience from the Asiana plane crash, we recognized the potential power of this modality for earlier hospital notification. Building on this conceptual idea, the present study is the first ever investigation of a prospective signally disaster preparedness activation mechanism built from these non-traditional data sources targeted at the hospital level.
 
 ---
 
-# The ability to hear the signal in the noise is the key...
+# Modern Society's Digital Footprint
+
+.pull-left[
+- Every day, on average:
+    - 269 billion emails are sent&lt;sup&gt;1&lt;/sup&gt;
+    - 1.37 billion people log on to Facebook&lt;sup&gt;2&lt;/sup&gt;
+    - over 500 million Tweets are posted&lt;sup&gt;3&lt;/sup&gt;
+    - over 500 million people log on to Instagram&lt;sup&gt;4&lt;/sup&gt;
+]
+
+.pull-right[
+![](assets/img/online_in_60s_2.jpg)
+]
+
+.footnote[1: [The Radicati Group, Feb 2017](http://www.radicati.com/wp/wp-content/uploads/2017/01/Email-Statistics-Report-2017-2021-Executive-Summary.pdf)&lt;br /&gt;2: [Facebook, June 2017](https://newsroom.fb.com/company-info/)&lt;br /&gt;3: [Twitter, 2016](https://business.twitter.com/en/basics.html)&lt;br /&gt;4: [Instagram, 2017](https://instagram-press.com/our-story/)]
+
+&lt;!--
+    https://www.allaccess.com/merge/archive/26034/what-your-audience-is-doing-when-they-re-not
+--&gt;
+
+???
+
+Social media plays an ever increasing role in our society with 69% of Americans using social media including approximately 78 million persons using it multiple times per day. (http://www.pewinternet.org/fact-sheet/social-media/)
+
+Each minute it is estimated that 278,000 tweets are sent in the U.S. Social media is a highly interactive platform which is web based, allows two way communications between users, and occurs in a virtual space.
+
+---
+layout: false
+class: inverse, fullscreen, middle, center
+
+# The ability to detect the signal in the noise is the key...
+
+---
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;&lt;a href="http://www.saraemoore.com/TwitterTraumaBBD2017"&gt;github:saraemoore/TwitterTraumaBBD2017&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;
 
 ---
 
-# Has it been used before???
+# Using Twitter to Track Events
 
-- Twitter -- microblogging
+.pull-left[
+- Twitter &amp;mdash; microblogging
     - two-way communication
 - Used to track non-disaster public health events
+]
+
+.pull-right[
+![](assets/img/journal.pntd.0005729.g001b.png)
+]
+
+![:scale 75%](assets/img/journal.pntd.0005729.g004.png)
+
+.footnote[&lt;a name=cite-twitterdengue2017&gt;&lt;/a&gt;[Marques-Toledo, Degener, Vinhal, Coelho, Meira, Codeço, and Teixeira (2017)](https://doi.org/10.1371/journal.pntd.0005729)]
+
+???
+
+Twitter has also been described as a form of 'microblogging' that allows 'dissemination of information that is timely and vast' and it has become a highly utilized format by the public following worldwide mass casualty events.
+
+Twitter allows two-way communication has been used to track non-disaster public health events, and we hypothesized that it could be used to develop a prospective multiple casualty warning signal for hospital based activation.
 
 ---
 
-# How about for Disasters???
+# Using Twitter to Track Disasters
 
-- Primarily to deliver information
-    - 2009 Taiwan typhoon
-    - 2010 Haiti earthquake
-    - 2011 Egyptian uprising
+.pull-left[
+- Information delivery
+    - 2009: Typhoon Morakot in Taiwan
+    - 2010: Earthquake in Haiti
+    - 2011: Egyptian uprising
 
 - Fed agencies
     - FEMA
     - National Weather Service
     - US Government (2010)
+]
+
+.pull-right[
+[![:scale 60%](assets/img/704px-Typhoon_Morakot_Aug_7_2009.jpg)](http://rapidfire.sci.gsfc.nasa.gov/gallery/?2009219-0807/Morakot.A2009219.0525.2km.jpg)
+![](assets/img/embassy_sfocrash.png)
+]
+
+&lt;!--
+    
+    https://www.pbs.org/newshour/world/haiti-quake-propels-twitter-community-mapping-efforts
+    https://www.wired.com/2010/01/texts-tweets-saving-haitians-from-the-rubble/
+
+* &lt;a name=cite-sewolferry2015&gt;&lt;/a&gt;[Woo, Cho, Shim, Lee, and Song (2015)](https://doi.org/10.3390/ijerph120910974)
+* &lt;a name=cite-japanearthquake2014&gt;&lt;/a&gt;[Jung and Moro (2014)](http://dx.doi.org/10.1111/disa.12071)
+* &lt;a name=cite-spatiotemporal2014&gt;&lt;/a&gt;[Cheng and Wicks (2014)](https://doi.org/10.1371/journal.pone.0097807)
+* &lt;a name=cite-bostonbombing2015&gt;&lt;/a&gt;[Sutton, Gibson, Spiro, League, Fitzhugh, and Butts (2015)](https://doi.org/10.1371/journal.pone.0134452)
+--&gt;
+
+???
+
+Several prior case studies have been published detailing experiences with the platform ranging from directing rescuers to victims following typhoons, hurricanes, earthquakes, and terrorist events, to using the platform to exchange information about how to reach disaster response resources for recovery. To date, research that has been conducted on using these powerful tools during times of disaster are limited to epidemiologic reports of basic Twitter use statistics and characteristics of users.
+
+Social media has played an integral role in several prior large scale disasters including the the 2011 Egyptian uprising [3], Taiwan typhoon in 2009 [4], and in the 2010 Haiti earthquake. In each of these cases, traditional communication methods were inadequate and the use of social media improved coordination efforts of disaster response and recovery. Similarly, social media has been successfully utilized in other fields to predict and respond to public health events.
+
+Merchant RM, Elmer S, Lurie N. "Integrating Social Media into Emergency-Preparedness Efforts." NEJM. 365(4):289-291; 2011. https://doi.org/10.1056/NEJMp1103591 PMID: 21793742
+
+Huang CM, Chan E, Hyder AA. "Web 2.0 and Internet Social Networking: A New tool for Disaster Management? - Lessons from Taiwan." BMC Medical Informatics &amp; Decision Making. 10(57); 2010.
+
+Advocates believe that social media tools have great promise for enhancing our current disaster management communication strategies but studies are lacking [3]. These concepts have remained largely theoretical and the limited prior data available have focused on the descriptions of the public use of social media following various worldwide crises. Frequently, delayed notification and lack of early information has hindered timely hospital based activations in large scale multiple casualty events. Although many institutions and federal agencies have incorporated a social media response to deliver information to the public following an event [3], there has been no focused research on leveraging this platform to develop improved and early disaster notification mechanisms to law enforcement, prehospital providers, or hospital systems.
 
 ---
 
-# Hypothesis
+# Objectives
 
-- Twitter feeds could be used to develop a prospective multiple casualty warning signal for hospital based activation
+Use real-time social media data to:
+
+* detect mass-casualty incidents and/or
+* predict location-specific trauma center volume.
+
+Goal: to determine if Twitter feeds could be used to develop a prospective multiple casualty warning signal for hospital based activation.
+
+???
+
+Delayed notification and lack of early information hinder timely hospital based activations in large scale multiple casualty events. We hypothesized that Twitter real-time data would produce a unique and reproducible signal within minutes of multiple casualty events and we investigated the timing of the signal compared with other hospital disaster notification mechanisms.
+
+The objective of this study was to 1) initiate the development of a qualitative model designed to provide an additional tool for hospital level disaster notification and 2) to assure that the model would not falsely activate in a control event.
 
 ---
 
 # Methods
 
-- Historical Retrospective Analysis
-    - Develop the Early Warning Signal from 5 recent U.S. Multiple Casualty Incidents
+- Retrospective (historical Twitter data)
+    - Five recent U.S. Multiple Casualty Incidents
+    - Event initiation `\(\rightarrow\)` 7 days post-event
 
-- Prospective Test of the Signal Thresholds
-    - Super Bowl 50 (San Francisco 2016)
+- Prospective (Twitter data collected via streaming API)
+    - Super Bowl 50 (San Francisco, Feb 2016)
+    - Approximately 7 days prior to and 7 days after Super Bowl kickoff
 
----
+???
 
-# Developing the Signal
-
-- Acquired post hoc from Twitter via Gnip's Historical PowerTrack
-    - data was *purchased* from the Twitter Corp.
-- 100% capture based on key words
-- Complete tweet content: tweet text, user information, geocoding, structure, # of user's followers, retweets, &amp; timing
-
----
-
-# MCI Events
-
-&gt; "A mass casualty incident is defined as an event which generates more patients at one time than locally available resources can manage using routine procedures. It requires exceptional emergency arrangements and additional or extraordinary assistance." &amp;mdash; .small[&lt;a name=cite-whomci2007&gt;&lt;/a&gt;[WHO (2007)](http://www.who.int/iris/handle/10665/43804)]
-
-- Event initiation `\(\rightarrow\)` 7 days post-event
-- Event initiation times:
-    - Sandy Hook: Dec 14, 2012 @ 9:35:00 EST
-    (time of first 911 calls)
-    - Boston Bombing: April 15, 2013 @ 14:49:00 EDT
-    (detonation time of first bomb)
-    - SF Asiana 214: July 6, 2013 @ 11:28:00 PDT
-    (seawall impact time)
-    - Napa Earthquake: Aug 24, 2014 @ 03:20:44 PDT
-    (earthquake origin time)
-    - Marysville School Shooting: Oct 24, 2014 @ 10:39:00 PDT
-    (time of first 911 call)
+Historical analysis to develop an early warning signal followed by data collection to prospectively 'test' the signal thresholds
 
 ---
 
@@ -273,6 +321,85 @@ As of April, 2015, 'firehose' access is cut off for all third-party resellers. N
 
 ---
 
+# Processing Twitter data (in R)
+
+.pull-left[
+
+* Parsing JSON (javascript object notation) files:
+  * [rjson](https://cran.r-project.org/web/packages/rjson/index.html),
+  * [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html), and
+  * **[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)**.
+* Reading from REST APIs:
+    * **twitteR** ([CRAN](https://cran.r-project.org/web/packages/twitteR/index.html)/[github](https://github.com/geoffjentry/twitteR))
+    * [RTwitterAPI](https://github.com/joyofdata/RTwitterAPI)
+* Reading from Streaming API:
+    * **streamR** ([CRAN](https://cran.r-project.org/web/packages/streamR/index.html)/[github](https://github.com/pablobarbera/streamR))
+    * tweet2r ([CRAN](https://cran.r-project.org/web/packages/tweet2r/index.html)/[github](https://github.com/pauarago/tweet2r))
+]
+
+.pull-right[
+
+* Authenticating via OAuth:
+    * ROAuth ([CRAN](https://cran.r-project.org/web/packages/ROAuth/index.html)/[github](https://github.com/geoffjentry/ROAuth))
+* Other Resources:
+   * Workshop materials and slides: [Analyzing and Collecting Social Media Data with R](https://github.com/pablobarbera/social-media-workshop)
+    * CRAN's ["Web Technologies" package collection](https://cran.r-project.org/web/views/WebTechnologies.html), particularly the "parsing Data from the Web" and "social media" sections
+]
+
+- Not in R?: See Twitter's list of tools for [other programming languages](https://dev.twitter.com/overview/api/twitter-libraries)
+
+---
+layout: false
+class: inverse, fullscreen, middle, center
+
+# Exploratory Analysis of Historical Twitter data
+
+---
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;&lt;a href="http://www.saraemoore.com/TwitterTraumaBBD2017"&gt;github:saraemoore/TwitterTraumaBBD2017&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;
+
+---
+
+# Data on MCIs
+
+- Sandy Hook Elementary School shooting (**SH**)
+    - 14 Dec 2012 @ 9:35:00 EST ([time of first 911 calls](http://cspsandyhookreport.ct.gov/cspshr/Reports/CFS_1200704559.zip))
+    - `\(n \approx 1.8\)` mil
+- Boston Marathon bombing (**BB**)
+    - 15 Apr 2013 @ 14:49:00 EDT ([detonation time of first bomb](http://www.mass.gov/eopss/docs/mema/after-action-report-for-the-response-to-the-2013-boston-marathon-bombings.pdf))
+    - `\(n \approx 1.1\)` mil
+- Asiana Airlines 214 crash at SFO (**SF**)
+    - 6 Jul 2013 @ 11:28:00 PDT ([seawall impact time](https://www.ntsb.gov/investigations/AccidentReports/Reports/AAR1401.pdf))
+    - `\(n \approx 400,000\)`
+- South Napa earthquake (**NE**)
+    - 24 Aug 2014 @ 03:20:44 PDT ([earthquake origin time](http://earthquake.usgs.gov/earthquakes/eventpage/nc72282711))
+    - `\(n \approx 200,000\)`
+- Marysville Pilchuck High School shooting (**MV**)
+    - 24 Oct 2014 @ 10:39:00 PDT ([time of first 911 call](https://everettwa.gov/DocumentCenter/View/3915))
+    - `\(n \approx 250,000\)`
+
+???
+
+Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
+
+Using disaster specific search terms, all relevant tweets from the event to 7 days post-event were analyzed for 5 recent US based multiple casualty events (Boston Bombing [BB], SF Plane Crash [SF], Napa Earthquake [NE], Sandy Hook [SH], and Marysville Shooting [MV]). Quantitative and qualitative analysis of tweet utilization were compared across events.
+
+Tweets relating to five recent U.S. multiple casualty events were acquired post hoc from Twitter via Gnip's Historical PowerTrack (http://support.gnip.com/apis/historical_api/). All data was purchased from the Twitter Corporation. The tweet content including the text of the tweet, user information, geocoding of the tweet, structure of the tweet, number of each user's followers, retweet counts, and timing of the tweets were supplied. The five multiple casualty events of interest included the Boston Bombing, San Francisco Asiana 214 Plane Crash, Napa Earthquake, Sandy Hook Elementary School shooting, and Marysville School Shooting. Relevant tweets posted on the day of the event and in the six days thereafter (for seven days total per event) were identified using the incident time of each event (as displayed here).
+
+Historical Power Track. Accessed November 2015. http://support.gnip.com/apis/historical_api/
+
+---
+
+# Developing the Signal
+
+- Data acquired post hoc from Twitter via Gnip's Historical PowerTrack
+    - data was *purchased* from the Twitter Corp.
+- 100% capture based on keywords
+- Complete tweet content: tweet text, user information, geocoding, structure, # of user's followers, retweets, &amp; timing
+
+---
+
 # Keywords for multiple casualty events
 
 .smaller[
@@ -290,59 +417,33 @@ Marysville Pilchuck High School shooting (MV) | School (gunman OR Marysville OR 
                                               | Marysville (shooting OR gunman OR student)
 ]
 
----
+???
 
-# Processing Twitter data
+Tweets were identified using disaster-specific filtering rules. Where more than one text pattern was listed for a given event, a tweet was included if it matched on either (or both). Filtering was performed via a case-insensitive keyword search where individual keywords were separated by boolean operators. A space denotes an 'and' operator, an uppercase 'OR' denotes an 'or' operator, and this logic is combined using parentheses to group clauses. Quotation marks indicate terms which should be matched exactly (not tokenized) (http://support.gnip.com/apis/powertrack/rules.html).
 
-- In R: See CRAN's ["Web Technologies" package collection](https://cran.r-project.org/web/views/WebTechnologies.html), particularly the "parsing Data from the Web" and "social media" sections
-- Not in R: Twitter's list of tools for [other programming languages](https://dev.twitter.com/overview/api/twitter-libraries)
-
----
-
-# Processing Twitter data in R
-
-.pull-left[
-
-* Parsing JSON (javascript object notation) files:
-  * [rjson](https://cran.r-project.org/web/packages/rjson/index.html),
-  * [RJSONIO](https://cran.r-project.org/web/packages/RJSONIO/index.html), and
-  * **[jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)**.
-* Reading from REST APIs:
-    * **twitteR** ([CRAN](https://cran.r-project.org/web/packages/twitteR/index.html)/[github](https://github.com/geoffjentry/twitteR))
-    * [RTwitterAPI](https://github.com/joyofdata/RTwitterAPI)
-* Reading from Streaming API:
-    * **streamR** ([CRAN](https://cran.r-project.org/web/packages/streamR/index.html)/[github](https://github.com/pablobarbera/streamR))
-    * tweet2r ([CRAN](https://cran.r-project.org/web/packages/tweet2r/index.html)/[github](https://github.com/pauarago/tweet2r))
-
-]
-
-.pull-right[
-
-* Authenticating via OAuth:
-    * ROAuth ([CRAN](https://cran.r-project.org/web/packages/ROAuth/index.html)/[github](https://github.com/geoffjentry/ROAuth))
-* Other Resources:
-   * Workshop materials and slides: [Analyzing and Collecting Social Media Data with R](https://github.com/pablobarbera/social-media-workshop)
-
-]
+Tweet data was packaged as a collection of compressed JSON files, each containing tweets from one 10 minute span of a single event's seven day collection period. Data within these JSON files was imported and cleaned using R with package jsonlite and subsequently summarized and visualized using ggplot2. Any tweets posted prior to their respective event's time were excluded from the analytic sample.
 
 ---
 
 # Analysis
 
 - Mostly qualitative, with objective of identifying similarities across events
-
----
-
-# Disaster Signal
-
 - Differing tweet per minute thresholds were compared to:
     - County disaster notification time (if a county disaster page was activated)
     - Hospital stand by notification times (if no county disaster page was performed)
     - Patient arrival times (obtained from after action reports).
 
+???
+
+Quantitative and qualitative analysis were performed to identify similarities across events and the timing of differing tweet per minute thresholds were compared to the county disaster signal for each event. Numerical summaries of interest were computed, including mean followers per user, proportion of collected tweets that were retweets, and maximum tweet-per-minute volume. To better structure visualizations for qualitative identification of common event 'signatures,' tweets meeting all criteria described above were summarized into tweets per minute during the first twelve hours after the event onset. The speed with which tweet volume reached a threshold and/or peak was compared to the timing of the traditional county disaster signal for each event. For multiple casualty events that require the resources beyond normal functioning, county governments in conjunction with local official coordinate disaster wide responses involving multiple jurisdictions and hospital systems. Each of the events utilized in this report generated a detailed after action report that produced by the responsible governing body. These reports can include detailed information on timing of the initial event, first EMS calls, hospital standby notification, and county wide disaster activation (if activated). Not all 'after action' reports report all metrics. These after action reports are considered the official documentation of the time line of the events and therefore, we utilized the metrics available in each report. To compare the speed with which tweets accumulated across events, the cumulative tweet volume in the first 60 minutes after each event's onset was also computed.
+
 ---
 
 # Results
+
+
+
+
 
 - 3.8 million tweets
     - SH: 1,815,751
@@ -354,6 +455,12 @@ Marysville Pilchuck High School shooting (MV) | School (gunman OR Marysville OR 
 - Retweets mean of 82-564 times per event
 - Mean followers 3382-9992 across events
 
+???
+
+Over 3.8 million tweets were analyzed (SH 1.8 m, BB 1.1m, SF 430k, MV 250k, NE 205k). Peak tweets per min ranged from 209-3326. The mean followers per tweeter ranged from 3382-9992 across events. Retweets were tweeted a mean of 82-564 times per event. Tweets occurred very rapidly for all events (&lt;2 mins) and represented 1% of the total event specific tweets in a median of 13 minutes of the first 911 calls.
+
+For the 5 recent U.S. multiple casualty events, over 3.8 million study tweets were analyzed including a per-event tweet count as shown. The distribution of tweets included unique tweets in 45% of postings and the remaining 55% were retweets or reposting of prior tweets. Retweets were tweeted a mean of 82-564 times per event. The mean followers of the person originating a tweet were ranged from 3382-9992 across events.
+
 ---
 
 # Signal Threshold
@@ -362,17 +469,101 @@ Marysville Pilchuck High School shooting (MV) | School (gunman OR Marysville OR 
 - Initiated before patient arrival to local hospitals*
 - Preceded traditional disaster notification and hospital standby notices in SF and NE, and followed within 2 mins in BB &amp; MV
 
----
+???
 
-# Exploratory Analyses
+A 200 tweets/min threshold was reached fastest with NE (2 min), BB (7 min), and SF (18 mins). If this threshold was utilized as a signaling mechanism to place local hospitals on standby for possible large scale events, in all case studies, this signal would have preceded patient arrival. Importantly, this threshold for signaling would also have preceded traditional disaster notification mechanisms in SF, NE, and simultaneous with BB and MV.
+
+All events reached their overall maximum peak tweet posting per minute rate within 3 hours following the incident with the peak rate being reached fastest in the NE, SF, and MV (Fig 1). The tweet graphic signatures were consistent across disasters except SH which had similar signature but, delayed signal initiation (Fig 1). Peak tweets per minute ranged from 209-3326 for each event with the median in the first 60 minutes from 10-2169 (BB: 2564; SF 549; MV 162; NE 368; SH 10). The total tweets in the first 60 minutes represented a high percentage of the total tweets in the 7 days following the incident time in all cases except SH (11.5% BB, 7.8% SF, 8.0% MV, 11.9% MV, 0.14% SH).
+
+Initial tweets occurred very rapidly in all events with the first signals detected less than 2 mins after the incident start times. When isolating the analysis to only tweets in the first 60 minutes, 1% of the total event specific tweets were reached in a median of 13 minutes of the first 911 calls (Table 3) with the most rapid 1% threshold being reached in the NE (2 minutes), BB (9 minutes), and SF (13 minutes) (Table 3). The maximum tweets per minute in the first 60 minutes was highest for the BB (3326 tweets/minute), followed by SF (1423), MV (957), NE (739) and SH (209) (Fig 2).
+
+Differing thresholds were compared to the county disaster notification time (if a county disaster page was activated), hospital stand-by notification times (if no county disaster page was performed), and patient arrival times (obtained from after action reports). A 200 tweet per minute threshold was reached fastest with NE (2 min), BB (7 min), and SF (18 mins). If this threshold was utilized as a signaling mechanism to place local hospitals on standby for possible large scale events, excluding SH, the signal would have preceded patient arrival to local hospitals in all cases. It would also have preceded traditional county disaster notification and hospital standby notices in SF and NE, and followed within minutes in BB (2.5 minutes).
+
+In both school shootings, a clear county wide disaster activation time was not reported in the after action reports. In the case of MV, there was an all-county wide law enforcement communication sent 28 minutes after the incident. Using this as an indicator in place of an official disaster mass casualty warning, our signal threshold would have been initiated within 2 minutes of this notice and 16 minutes prior to patient arrival at the hospital. For the Sandy Hook (SH) school shooting time line there was no clear time for the county disaster page available or hospital stand by times available in official after action reports making analysis of our signal not possible. There were also no victims transported to hospitals and the first report of casualties for SH did not occur until approximately 40 minutes after the event incident time.
+
+
+---
+layout: false
+
+class: fullscreen, middle, center
 
 &lt;!--
 [Link](file:///Users/fpgcdi/Dropbox/Trauma\ and\ Coagulation\ \(White\ Space\ Conflict\)/Twitter/prelim_analysis/index.html)
 --&gt;
 
+
+
+
+[
+&lt;img src="index_files/figure-html/tweetspermin_lineplot1-1.png" style="display: block; margin: auto;" /&gt;
+](tweetspermin_dygraph1.html)
+
+
+
+---
+class: fullscreen, middle, center
+
+[
+&lt;img src="index_files/figure-html/tweetspermin_lineplot2-1.png" style="display: block; margin: auto;" /&gt;
+](tweetspermin_dygraph2.html)
+
+
+
+---
+class: fullscreen, middle, center
+
+[
+&lt;img src="index_files/figure-html/tweetspermin_lineplot4-1.png" style="display: block; margin: auto;" /&gt;
+](tweetspermin_dygraph4.html)
+
+
+
+???
+
+The tweet graphic signatures were consistent across disasters except SH which had similar signature but, delayed signal initiation.
+
+---
+class: fullscreen, middle, center
+
+[
+&lt;img src="index_files/figure-html/tweetspermin_lineplot3-1.png" style="display: block; margin: auto;" /&gt;
+](tweetspermin_dygraph3.html)
+
+
+
+---
+class: fullscreen, middle, center
+
+[
+&lt;img src="index_files/figure-html/tweetspermin_lineplot5-1.png" style="display: block; margin: auto;" /&gt;
+](tweetspermin_dygraph5.html)
+
+
+
+
+
+
+---
+class: fullscreen, middle, center
+
+
+
+&lt;img src="index_files/figure-html/volume_tweets_1hr_allevents-1.png" style="display: block; margin: auto;" /&gt;
+
+???
+
+Tweets occurred very rapidly for all events (&lt;2 mins)
+1% of the total event specific tweets in a median of 13 minutes of the first 911 calls
+
+---
+class: fullscreen, middle, center
+
+&lt;img src="index_files/figure-html/cumulativepct_tweets_1hr_allevents-1.png" style="display: block; margin: auto;" /&gt;
+
 ---
 
-# Tool for Location
+# Hashtag use
+
 
 ---
 
@@ -383,11 +574,26 @@ class: fullscreen, middle, center
 
 ---
 
+# Localization
+
+---
+
 class: fullscreen, middle, center
 
 
 
 
+
+
+[![](assets/img/sfo_leaflet_screenshot.png)]](sfo_leaflet.html)
+
+
+
+---
+layout: false
+class: inverse, fullscreen, middle, center
+
+# Data Visualization
 
 ---
 
@@ -399,37 +605,76 @@ layout: true
 
 # Visualization
 
+**[ggplot2](http://ggplot2.tidyverse.org)**
+- [package source](https://github.com/tidyverse/ggplot2), [docs](http://ggplot2.tidyverse.org/reference/)
+
 .pull-left[
 
-ggplot2, of course
-
-[htmlwidgets](http://www.htmlwidgets.org/) (interactive JavaScript-based graphics from within R):
-* [sparkline](https://github.com/htmlwidgets/sparkline) for small inline Tufte-style plots
-* [DT](http://rstudio.github.io/DT/) (aka DataTables)
-* [dygraphs](https://rstudio.github.io/dygraphs/) for time series
-* [streamgraph](http://hrbrmstr.github.io/streamgraph/), also for time series
-* [leaflet](https://rstudio.github.io/leaflet/) for mapping
-* etc.
-
+**[htmlwidgets](http://www.htmlwidgets.org/)**: interactive data visualization framework in R
+- provides the framework on which most of the interactive plotting packages in R rely (if they use JavaScript plotting libraries on the backend).
+- [package source](https://github.com/ramnathv/htmlwidgets), [docs](http://www.htmlwidgets.org/), [gallery](http://gallery.htmlwidgets.org/)
+- Advanced usage may require knowledge/use of JavaScript.
+- Use with [R Markdown](http://rmarkdown.rstudio.com) or [Shiny](http://shiny.rstudio.com/)
 ]
 
 .pull-right[
-
-* Use with [R Markdown](http://rmarkdown.rstudio.com) or [Shiny](http://shiny.rstudio.com/)
-* **[Gallery of htmlwidgets](http://hafen.github.io/htmlwidgetsgallery/)**
-
+- [sparkline](https://github.com/htmlwidgets/sparkline): interactive versions of very small/inline graphics (Edward Tufte)
+- [DT](https://github.com/rstudio/DT) ([docs](http://rstudio.github.io/DT/)): interactive tables (aka DataTables)
+- [dygraphs](https://github.com/rstudio/dygraphs) ([docs](http://rstudio.github.io/dygraphs)): interactive time series plots
+- [streamgraph](http://hrbrmstr.github.io/streamgraph/): interactive streamgraphs, also for time series
+- [leaflet](https://github.com/rstudio/leaflet) ([docs](http://rstudio.github.io/leaflet)): interactive maps
+* `\(\ldots\)`
 ]
 
 ---
 
-# Prospective Testing of Signal
+# More `htmlwidgets` packages
 
 .pull-left[
-- Super Bowl 50
-- Prospective API using generic search terms
-- one or more of the generic terms plus a location or event term
-- 2 week time period
-- Moving Average calculated
+- [Highcharter](http://jkunst.com/highcharter/): interface to the Highcharts JavaScript library
+- [formattable](https://renkun.me/formattable/): visualize/format vectors and data frames
+- [threejs](https://github.com/bwlewis/rthreejs): interactive 3d plots and globes
+- [MetricsGraphics](http://hrbrmstr.github.io/metricsgraphics/): interface to the MetricsGraphics D3 JavaScript library
+- [rbokeh](https://github.com/bokeh/rbokeh) ([docs](http://hafen.github.io/rbokeh/), [useR2016 slides](http://slides.com/hafen/rbokeh#/)): interface to the Bokeh Python library
+- [networkD3](http://christophergandrud.github.io/networkD3/): interactive [D3](http://d3js.org/) JavaScript network graphs
+- [visNetwork](https://github.com/datastorm-open/visNetwork) ([docs](http://datastorm-open.github.io/visNetwork)): interactive network graphs
+]
+
+.pull-right[
+- [plotly](https://github.com/ropensci/plotly) ([docs](https://plot.ly/r/)):
+    - Convert `ggplot2` graphics `\(\rightarrow\)` interactive graphics via `ggplotly()` and the plot.ly [ggplot2 library](https://plot.ly/ggplot2/) OR
+    - Create interactive graphics directly with `plot_ly()` and the plot.ly [R library](https://plot.ly/r/)
+    - Can operate entirely locally (your plot isn't automatically uploaded to plot.ly's servers and shared with the world).
+- [ggiraph](https://github.com/davidgohel/ggiraph); [ggiraphExtra](https://github.com/cardiomoon/ggiraphExtra): make `ggplot2` graphics interactive.
+- [d3heatmap](https://github.com/rstudio/d3heatmap) ([demo](http://rpubs.com/jcheng/mtcars-heatmap)): interactive heatmaps
+]
+
+---
+layout: false
+class: inverse, fullscreen, middle, center
+
+# Comparison with Prospective Twitter data
+
+---
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;&lt;a href="http://www.saraemoore.com/TwitterTraumaBBD2017"&gt;github:saraemoore/TwitterTraumaBBD2017&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;
+
+---
+
+
+
+
+
+# Super Bowl 50
+
+.pull-left[
+- Match 1+ location keywords AND/OR 1+ event keywords
+- 2 weeks (Sun, 31 Jan 2016 until Sun, 14 Feb 2016)
+- Collected 55,354,048 tweets, retweets, and quote tweets
+    - +248 truncated records (discarded)
+    - +6,675,076 records not captured (exceeded rate limit)
 ]
 
 .pull-right[
@@ -441,19 +686,125 @@ ggplot2, of course
 
 ???
 
-A prospective API (R-based application program interface) was then constructed using generic search terms for potential multiple casualty events and was prospectively used to gather data from Twitter via their API. key words were developed by studying both the most frequently used hashtags and keywords common across the five previously analyzed events ("breakingnews", "cnn", "pray", etc.) and by utilizing knowledge of locally relevant hashtags and keywords ("sf", "sfgh", "zfgh", "thegeneral", etc.).
+Event &amp; location key words utilized in the prospective test signal for Super Bowl 50.
+
+A prospective API (R-based application program interface) was then constructed using generic search terms for potential multiple casualty events and was prospectively used to gather data from Twitter via their API (application programming interface) during a recent high profile sporting event (SF Super Bowl 50). SB50 was to be used as a control event to test the tweet per minute thresholds developed from the prior 5 US multiple casualty events. We compared the multiple casualty event results to the control event to determine how often a warning would have fired in error for various tweet/minute threshold signals using potential multiple casualty search terms or 'event' and a 'location' keyword. The key words were developed by studying both the most frequently used hashtags and keywords common across the five previously analyzed events ("breakingnews", "cnn", "pray", etc.) and by utilizing knowledge of locally relevant hashtags and keywords ("sf", "sfgh", "zfgh", "thegeneral", etc.).
+
+From Sun, Jan 31, 2016 at 18:43:14 PST until Sun, Feb 14, 2016 at 16:03:49 PST, connected to Twitter's 'POST statuses/filter' public stream with the following 'track keywords'/'filter predicates', where a 'phrase' matched if *any* of the terms were present in the Tweet (order- and case-insensitive):
+
+According to Twitter, "The text of the Tweet and some entity fields are considered for matches. Specifically, the `text` attribute of the Tweet, `expanded_url` and `display_url` for links and media, `text` for hashtags, and `screen_name` for user mentions are checked for matches."
+
+Moving Average calculated
+
+&lt;!--
+- No signal activation even during the height of the Super Bowl activities
+--&gt;
+
+As a proof of concept exercise, a prospective API using generic search terms for the event was built in anticipation of the Super Bowl 50 to test the threshold of 200 tweets per minute for triggering notification of multiple casualty events. The goal was to test whether a high profile, frequently tweeted public event would falsely trigger the signal even if no mass casualty situation arose during the event. The API gathered relevant tweets that included one or more of the generic terms plus a location or event term for a two week period beginning one week before the Super Bowl and continuing for 7 days following the Super Bowl.
+
+An estimated 55,355,870 original tweets, retweets, and quote tweets were collected over the approximately two week period. Not included in this total were 248 partial or truncated tweets which were discarded for incomplete data. The contents of an estimated 6,675,076 additional tweets were not captured because, at some moments, the provided keywords matched more tweets than Twitter's imposed rate limit allowed to be delivered.
+
+
+Estimated total number of tweets (including retweets and quote tweets) collected: 55,354,048 &lt;!--55,355,870--&gt;. This estimate takes into account the 248 partial/truncated tweets collected but discarded for incomplete data as well as an estimated 6,675,076 records which were not captured because the keywords matched more Tweets than Twitter's imposed rate limit allowed to be delivered.
+
+The volume of Super Bowl tweets returned at any moment in time were subject to a "streaming cap": the free public filtered streams offered by Twitter "max out" at a small percentage (approximately 1%) of the total volume of tweets coming through Twitter's "firehose." When the streaming cap is exceeded, a rate limiting message is issued by the streaming service indicating how many tweets were missed. Tweets were collected into JSON files which were rotated approximately every half hour. JSON files were preprocessed via shell script and imported and cleaned utilizing the jsonlite and tidyjson packages in R. Tweets containing at least one event-related keyword AND at least one location-related keyword were summarized as tweets per minute over the entire collection period.
+
+---
+class: fullscreen, middle, center
+
+
+
+---
+class: fullscreen, middle, center
+
+
+
+
+
+&lt;img src="index_files/figure-html/sb_kickoff_12hrs_tweets_per_min_filtered_userpactime_line-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# SB 50: Gathered &gt;55 mil tweets
+# Suspicious spike
 
-No signal activation even during the height of the Super Bowl activities
+
+.pull-left[
+[![:scale 90%](assets/img/tweetstorm_screenshot_20161219.jpg)](https://twitter.com/Centric510/status/696556613109329920)
+]
+
+.pull-right[
+- Many retweets of a single tweet in rapid succession
+    - 419 times in 29 seconds
+    - Auto-retweets/bots?
+- Lesson: ignore unsustained peaks
+    - `\(\rightarrow\)` smooth the time series
+]
+
+???
+
+Screenshot captured on 19 Dec 2016
+
+419 times were between 7 Feb 2016 9:05:30pm PST and 7 Feb 2016 9:05:59pm PST
+
+---
+class: fullscreen, middle, center
+
+
+
+&lt;img src="index_files/figure-html/sb_kickoff_12hrs_tweets_per_min_filtered_userpactime_line_withMA-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+
 
 ---
 
-# Unexpected Event
+# Unexpected Low Casualty Event
+
+![](assets/img/chp_stabbing_sfgate.png)
+
+???
+
+http://www.sfgate.com/crime/article/CHP-Officer-attacked-and-injured-in-San-Francisco-6801249.php
+
+Although not planned, while the streaming data collection was running, a high profile but low casualty count (one victim) event occurred during the Super Bowl near the Fan Zone Experience in San Francisco. This event provided an additional test to our signal to determine if a low casualty count but high profile trauma would falsely activate our signal. On Tuesday, February 2, 2016, between approximately 10:05 (time encounter began) and 10:10 (time of distress call) PST, a California Highway Patrol (CHP) officer was stabbed in San Francisco [16]. The first tweet about the stabbing from an SFPD officer appeared at 10:30 PST [17].
+
+---
+class: fullscreen, middle, center
+
+
+
+
+
+
+
+
+
+
+&lt;img src="index_files/figure-html/chp_12hrs_tweets_per_min_filtered_userpactime_line_horizlabel-1.png" style="display: block; margin: auto;" /&gt;
+
+class: fullscreen, middle, center
+
+
+
+class: fullscreen, middle, center
+
+
+
+???
+
 
 No signal activation for a High Profile, but low casualty event
+
+Between 10:00 and 12:00 on this date, 343,084 tweets were collected (Fig 3). After filtering the text of tweets for those which contained at least one event-related keyword and at least one location-related keyword in the text of the tweet, the total number of tweets over the two hour period was reduced to 72,952. In the two hours following this event, a signal using our key generic words with restriction to location set at the 200 tweet per minute threshold would not have fired (Fig 3) indicating that use of this as a large scale multiple casualty signal for placing hospitals on standby would have worked correctly during a high profile, low casualty event. In addition, the signal would not have been activated even during the height of the Super Bowl activities (during game time) again supported it as a potential signaling threshold for early warning detection (Fig 4).
+
+&lt;!--
+Plots below look in depth at tweets on Tue, Feb 2, 2016 between 10am and noon PST, when a CHP officer was stabbed in San Francisco between 10:05 and 10:10am (approximately). SFPD's first tweet about the stabbing appeared at 10:30am. 343,084 tweets were collected during this interval (10am to noon). After filtering for tweets which contain *both* a location and an event keyword in the text of the tweet (or original tweet, if the record is a retweet or quoted tweet), the number of records drops to 72,952. Filtering on only event keywords results in the retention of 192,251 records.
+--&gt;
+
+On Tue, Feb 2, 2016, between 10:05 and 10:10am PST (approximately), a CHP officer was stabbed in San Francisco. SFPD's first tweet about the stabbing appeared at 10:30am.
+
+
 
 ---
 
@@ -464,6 +815,37 @@ No signal activation for a High Profile, but low casualty event
 - Proof of Concept Study
 - Powerful, predictable, and potentially important resource for optimizing disaster response
 - Leverage advanced analytics for prospective monitoring
+
+???
+
+Social media platforms including Twitter have great potential for use in formalized disaster planning and response. Social media data has demonstrated that this mechanism is a powerful, predictable, and potentially important resource for optimizing disaster response. Further investigation is warranted to assess the utility of prospective signal thresholds for hospital based activation.
+
+Our findings confirm that information flows via Twitter extremely rapidly after an event of interest. In the 5 case events examined, the first relevant tweets appeared in under 2 minutes from the estimated start time of each event in the after action reports. These tweets were posted prior to 911 calls in all the events except for the Sandy Hook (SH) school shooting. Fig 1 demonstrates the rapid use and scalability and underscores the potential power of this modality for information dissemination. We believe that SH may have had a delayed scalability in the first hour following the event because this event took place at an elementary school where the number of persons on site during the time of the initial event with access to a device allowing posting to social media would have been extremely limited. In addition, the tweet signature is also likely a reflection of the number of secondary witnesses or the public nature of the disaster taking place. For those events occurring in highly populated areas or events, the number of potential witnesses and Twitter users will be greater than in events occurring in geographically isolated areas or low populated events.
+
+This proof of concept study has shown that a non-traditional data source like Twitter could be utilized to develop early warning signals of multiple casualty events that require hospital based responses that exceed normal operations. A 200 tweet per minute threshold signal in this study would have resulted in hospital notification before patient arrival in all cases where injuries requiring hospital based care were present. In addition, it would have sent notification prior to or within 3 minutes of county disaster signals in cases where county wide alerts were activated. Simultaneous or nearly simultaneous notification is still valuable given that redundant communications are needed given the high rate of failure of infrastructure that often occurs following many mass casualty events.
+
+Although more work is needed to identify the optimum tweet per minute threshold that would result in an appropriate sensitivity and specificity for a wide spectrum of hospital based disaster activations, a signal developed from generic trauma search terms coupled with terms that are geographically restricted has real promise. To be generalizable, our data utilized generic terms such as 'crash, accident, shot, shooting, stab, stabbed, stabbing, fall, dead, died, earthquake, flood, hurricane, tornado, victim, victims, fatality, fatalities, attack' coupled with a geographic restriction. However, to reflect the evolution of multiple casualty events since the original 5 included in this study occurred, we suggest expanding these generic terms to include 'terrorist' and 'terror.' It will be necessary if these signals are incorporated into practice, to continue to iterate on the most relevant terms as the safety and security of our world evolves.
+
+While promising in concept, the data presented in this paper can not be used to determine the false negative rate of a signal applied across a spectrum of disaster scenarios. Disasters remain unpredictable in frequency making prospective testing of the signal challenging both from a data storage standpoint and practicality standpoint. These signals will be most helpful if they are geographically restricted, but predicting in advance that an event will definitely occur to allow testing of the adapted signal for a given region is nearly impossible. One could create a signal for a given location and no event ever takes place. In contrast, it is impractical without massive compute infrastructure to prospectively monitor all geographic areas in the world for the next large scale disaster. Thus, the determination of the false negative rate (failure to activate for a real event) will remain reliant on retrospective tweet data ascertained following future disaster events of varying types.
+
+Although there are no standard approaches adopted widespread for the use of social media platforms for disaster planning and notification, there are many potential advantages to social media over traditional resources for communication of initial information in disaster times. Social media is inexpensive, rapidly disseminated, allows 2 way communication, scalable through 'retweets,' and not dependent upon a traditional power grid. In fact, there have been several worldwide incidences that have cited Twitter as the only source of communication available when other traditional communications have failed. In contrast, traditional media sources filter the message, are only one-way communication, have a slower dissemination, lack the same scalability, are dependent upon the power grid, and exclude geographically remote areas. Further, standard communication systems have failed in a number of recent events including the Taiwan typhoon in 2009, 2010 Haiti earthquake, and alternative communication sources including Twitter were relied upon heavily in the 2011 Egyptian uprising. Merchant et al. note that social media has great potential to increase 'our ability to prepare for, respond to, and recover from events that threaten the public's health.'
+
+These social media tools coupled with advanced analytics have great promise for further development of prospective early warning disaster signals, but they also present a number of limitations. To be most effective, the signals need to be geographically specific and thus, would require some customization. In contrast, the search terms the signals are built from as demonstrated by our Super Bowl test of the signal can be useful even if they are quite generic. Events that occur in more remote geographic areas that lack access to internet would be less likely to be sensitive to a signal built on social media activity. Further, there is differential use of social media across differing age groups, socioeconomic statuses, and geographically. Finally, infrastructure disruption in wide spread disasters may limit the use of social media and responding agencies must have access to social media for this tool to be effective. Each of these could limit the applicability of these types of warnings.
+
+---
+
+# Further reading
+
+&lt;!--
+&lt;sup&gt;1&lt;/sup&gt;
+--&gt;
+
+* &lt;a name=cite-twittertrauma2017&gt;&lt;/a&gt;[Callcut, Moore, Wakam, Hubbard, and Cohen (2017)](https://doi.org/10.1371/journal.pone.0186118), "Finding the Signal in the Noise: Could Social Media Be Utilized for Early Hospital Notification of Multiple Casualty Events?"
+* &lt;a name=cite-asianacrash2016&gt;&lt;/a&gt;[Campion, Juillard, Knudson, Dicker, Cohen, Mackersie, Campbell, and Callcut (2016)](http://dx.doi.org/10.1001/jamasurg.2015.5107), "Reconsidering the resources needed for multiple casualty events: Lessons learned from the crash of Asiana airlines flight 214"
+
+&lt;!--
+.footnote[1: [Callcut, Moore, Wakam, et al. (2017)](https://doi.org/10.1371/journal.pone.0186118)]
+--&gt;
 
 ---
 layout: false
@@ -517,14 +899,21 @@ Mood". In: _International Journal of Environmental Research and
 Public Health_ 12.9 (2015), pp. 10974-10983. URL:
 [https://doi.org/10.3390/ijerph120910974](https://doi.org/10.3390/ijerph120910974).
 
-&lt;a name=bib-twittertrauma2017&gt;&lt;/a&gt;[[7]](#cite-twittertrauma2017)
+&lt;a name=bib-asianacrash2016&gt;&lt;/a&gt;[[7]](#cite-asianacrash2016) E. M.
+Campion, C. Juillard, M. M. Knudson, et al. "Reconsidering the
+resources needed for multiple casualty events: Lessons learned
+from the crash of Asiana airlines flight 214". In: _JAMA Surgery_
+151.6 (2016), pp. 512-517. URL:
+[http://dx.doi.org/10.1001/jamasurg.2015.5107](http://dx.doi.org/10.1001/jamasurg.2015.5107).
+
+&lt;a name=bib-twittertrauma2017&gt;&lt;/a&gt;[[8]](#cite-twittertrauma2017)
 R. A. Callcut, S. Moore, G. Wakam, et al. "Finding the signal in
 the noise: Could social media be utilized for early hospital
 notification of multiple casualty events?" In: _PLOS ONE_ 12.10
 (Oct. 2017), pp. 1-12. URL:
 [https://doi.org/10.1371/journal.pone.0186118](https://doi.org/10.1371/journal.pone.0186118).
 
-&lt;a name=bib-twitterdengue2017&gt;&lt;/a&gt;[[8]](#cite-twitterdengue2017)
+&lt;a name=bib-twitterdengue2017&gt;&lt;/a&gt;[[9]](#cite-twitterdengue2017)
 C. d. A. Marques-Toledo, C. M. Degener, L. Vinhal, et al. "Dengue
 prediction by the web: Tweets are a useful tool for estimating and
 forecasting Dengue at country and city level". In: _PLOS Neglected
@@ -554,15 +943,16 @@ Tropical Diseases_ 11.7 (Jul. 2017), pp. 1-20. URL:
 
 
 **attached base packages:** 
-_stats_, _graphics_, _grDevices_, _utils_, _datasets_ and _base_
+_methods_, _stats_, _graphics_, _grDevices_, _utils_, _datasets_ and _base_
 
 **other attached packages:** 
-_pander(v.0.6.1)_ and _RefManageR(v.0.14.20)_
+_pander(v.0.6.1)_, _directlabels(v.2017.03.31)_, _xts(v.0.10-0)_, _zoo(v.1.8-0)_, _dygraphs(v.1.1.1.4)_, _scales(v.0.5.0)_, _ggplot2(v.2.2.1)_, _lubridate(v.1.7.1)_ and _RefManageR(v.0.14.20)_
 
 **loaded via a namespace (and not attached):** 
-_Rcpp(v.0.12.13)_, _lubridate(v.1.7.1)_, _sysfonts(v.0.7.1)_, _digest(v.0.6.12)_, _showtextdb(v.2.0)_, _rprojroot(v.1.2)_, _plyr(v.1.8.4)_, _R6(v.2.2.2)_, _jsonlite(v.1.5)_, _backports(v.1.1.1)_, _magrittr(v.1.5)_, _evaluate(v.0.10.1)_, _httr(v.1.3.1)_, _bibtex(v.0.4.2)_, _xaringan(v.0.4.4)_, _stringi(v.1.1.5)_, _xml2(v.1.1.1)_, _rmarkdown(v.1.6)_, _tools(v.3.3.3)_, _stringr(v.1.2.0)_, _showtext(v.0.5)_, _yaml(v.2.1.14)_, _htmltools(v.0.3.6)_, _knitr(v.1.17)_ and _methods(v.3.3.3)_
+_Rcpp(v.0.12.13)_, _plyr(v.1.8.4)_, _tools(v.3.3.3)_, _sysfonts(v.0.7.1)_, _digest(v.0.6.12)_, _jsonlite(v.1.5)_, _evaluate(v.0.10.1)_, _tibble(v.1.3.4)_, _gtable(v.0.2.0)_, _lattice(v.0.20-35)_, _rlang(v.0.1.4)_, _bibtex(v.0.4.2)_, _shiny(v.1.0.5)_, _crosstalk(v.1.0.0)_, _yaml(v.2.1.14)_, _showtextdb(v.2.0)_, _httr(v.1.3.1)_, _stringr(v.1.2.0)_, _xml2(v.1.1.1)_, _knitr(v.1.17)_, _htmlwidgets(v.0.9)_, _leaflet(v.1.1.0)_, _rprojroot(v.1.2)_, _grid(v.3.3.3)_, _R6(v.2.2.2)_, _rmarkdown(v.1.6)_, _xaringan(v.0.4.4)_, _magrittr(v.1.5)_, _backports(v.1.1.1)_, _htmltools(v.0.3.6)_, _showtext(v.0.5)_, _xtable(v.1.8-2)_, _mime(v.0.5)_, _colorspace(v.1.3-2)_, _httpuv(v.1.3.5)_, _labeling(v.0.3)_, _quadprog(v.1.5-5)_, _stringi(v.1.1.5)_, _lazyeval(v.0.2.1)_ and _munsell(v.0.4.3)_
     </textarea>
 <script src="libs/remark-latest.min.js"></script>
+<script src="macros.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "tomorrow-night-eighties",
 "highlightLines": true,
