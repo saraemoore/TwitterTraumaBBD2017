@@ -151,7 +151,7 @@ Communications in times of mass casualty events, especially those involving natu
 
 ???
 
-The difficulty for hospital based providers in the age of widespread availability of social media is trying to wade through the enormous amount of information that flows almost instantaneously following these events. This information nearly always precedes the activation of any formal notification process and we believe that social media as a form of non-traditional data has great potential to provide an opportunity to improve early warning of impending need to respond to mass or multiple casualty events. As an example, the county wide disaster page activation occurred nearly 30 minutes later then information appeared on social media feeds following the crash of a commercial jet liner in San Francisco with over 300 potentially injured occupants. In fact, the first tweet of a plane down occurred 30 seconds after the crash and preceded even the 911 calls. Drawing on the experience from the Asiana plane crash, we recognized the potential power of this modality for earlier hospital notification. Building on this conceptual idea, the present study is the first ever investigation of a prospective signally disaster preparedness activation mechanism built from these non-traditional data sources targeted at the hospital level.
+This information nearly always precedes the activation of any formal notification process. As an example, the county-wide disaster page activation occurred nearly 30 minutes later than information appeared on social media feeds following the crash of a commercial jet liner in San Francisco with over 300 potentially injured occupants. In fact, the first tweet of a plane down occurred 30 seconds after the crash and preceded even the 911 calls. Drawing on the experience from the Asiana plane crash, we recognized the potential power of this modality for earlier hospital notification.
 
 ---
 
@@ -179,13 +179,17 @@ The difficulty for hospital based providers in the age of widespread availabilit
 
 Social media plays an ever increasing role in our society with 69% of Americans using social media including approximately 78 million persons using it multiple times per day. (http://www.pewinternet.org/fact-sheet/social-media/)
 
-Each minute it is estimated that 278,000 tweets are sent in the U.S. Social media is a highly interactive platform which is web based, allows two way communications between users, and occurs in a virtual space.
+Each minute it is estimated that hundreds of thousands tweets are sent in the U.S. Social media is a highly interactive platform which is web based and allows two way communication between users.
 
 ---
 layout: false
 class: inverse, fullscreen, middle, center
 
 # The ability to detect the signal in the noise is the key...
+
+???
+
+The difficulty for hospital based providers in the age of widespread availability of social media is trying to wade through the enormous amount of information that flows almost instantaneously following these events.
 
 ---
 layout: true
@@ -218,7 +222,7 @@ TextCite(bib, "twitterdengue2017", .opts = list(max.names = 1))
 
 Twitter has also been described as a form of 'microblogging' that allows 'dissemination of information that is timely and vast' and it has become a highly utilized format by the public following worldwide mass casualty events.
 
-Twitter allows two-way communication has been used to track non-disaster public health events, and we hypothesized that it could be used to develop a prospective multiple casualty warning signal for hospital based activation.
+Twitter allows two-way communication has been used to track non-disaster public health events, such as in this study published earlier this year, where tweet volume was used to forecast cases of Dengue fever.
 
 ---
 
@@ -251,19 +255,17 @@ Twitter allows two-way communication has been used to track non-disaster public 
 
 Several prior case studies have been published detailing experiences with the platform ranging from directing rescuers to victims following typhoons, hurricanes, earthquakes, and terrorist events, to using the platform to exchange information about how to reach disaster response resources for recovery. To date, research that has been conducted on using these powerful tools during times of disaster are limited to epidemiologic reports of basic Twitter use statistics and characteristics of users.
 
-Social media has played an integral role in several prior large scale disasters including the the 2011 Egyptian uprising [3], Taiwan typhoon in 2009 [4], and in the 2010 Haiti earthquake. In each of these cases, traditional communication methods were inadequate and the use of social media improved coordination efforts of disaster response and recovery. Similarly, social media has been successfully utilized in other fields to predict and respond to public health events.
-
-Merchant RM, Elmer S, Lurie N. "Integrating Social Media into Emergency-Preparedness Efforts." NEJM. 365(4):289-291; 2011. https://doi.org/10.1056/NEJMp1103591 PMID: 21793742
-
-Huang CM, Chan E, Hyder AA. "Web 2.0 and Internet Social Networking: A New tool for Disaster Management? - Lessons from Taiwan." BMC Medical Informatics & Decision Making. 10(57); 2010.
-
-Advocates believe that social media tools have great promise for enhancing our current disaster management communication strategies but studies are lacking [3]. These concepts have remained largely theoretical and the limited prior data available have focused on the descriptions of the public use of social media following various worldwide crises. Frequently, delayed notification and lack of early information has hindered timely hospital based activations in large scale multiple casualty events. Although many institutions and federal agencies have incorporated a social media response to deliver information to the public following an event [3], there has been no focused research on leveraging this platform to develop improved and early disaster notification mechanisms to law enforcement, prehospital providers, or hospital systems.
+Social media has played an integral role in several prior large scale disasters including the the 2011 Egyptian uprising, Taiwan typhoon in 2009, and in the 2010 Haiti earthquake. In each of these cases, traditional communication methods were inadequate and the use of social media improved coordination efforts of disaster response and recovery. Similarly, social media has been successfully utilized in other fields to predict and respond to public health events.
 
 ---
 layout: false
 class: inverse, fullscreen, middle, center
 
 # Can social media be utilized for early hospital notification of multiple casualty incidents (MCIs)?
+
+???
+
+Advocates believe that social media tools have great promise for enhancing our current disaster management communication strategies but studies are lacking. These concepts have remained largely theoretical and the limited prior data available have focused on the descriptions of the public use of social media following various worldwide crises. Frequently, delayed notification and lack of early information has hindered timely hospital based activations in large scale multiple casualty events. Although many institutions and federal agencies have incorporated a social media response to deliver information to the public following an event, there has been no focused research on leveraging this platform to develop improved and early disaster notification mechanisms to law enforcement, prehospital providers, or hospital systems.
 
 ---
 layout: true
@@ -285,7 +287,7 @@ layout: true
 
 ???
 
-Delayed notification and lack of early information hinder timely hospital based activations in large scale multiple casualty events. We hypothesized that Twitter real-time data would produce a unique and reproducible signal within minutes of multiple casualty events and we investigated the timing of the signal compared with other hospital disaster notification mechanisms.
+We hypothesized that Twitter real-time data would produce a unique and reproducible signal within minutes of multiple casualty events and we investigated the timing of the signal compared with other hospital disaster notification mechanisms.
 
 The objective of this study was to 1) initiate the development of a qualitative model designed to provide an additional tool for hospital level disaster notification and 2) to assure that the model would not falsely activate in a control event.
 
@@ -352,9 +354,9 @@ I've listed the MOST COMMON API endpoints. Others exist, typically for more spec
 
 ???
 
-"Historical PowerTrack (HPT) is built to deliver Tweets at scale using a batch, Job-based design where the API is used to move a Job through multiple phases. These phases include volume estimation, Job acceptance/rejection, getting Job status, and downloading potentially many thousands of data files. Depending on the length of the request time period, Jobs can take hours or days to generate. A data file is generated for each 10-minute period that contains at least one Tweet. "
+"Historical PowerTrack (HPT) is built to deliver Tweets at scale using a batch, Job-based design where the API is used to move a Job through multiple phases. A data file is generated for each 10-minute period that contains at least one Tweet. "
 
-"Full-Archive Search (FAS) delivers matched Tweets in a manner analogous to Google Search. When you search for a particular term, Google Search does not return or display the potentially millions of matching results all at once. Rather, it delivers a small number of results per scrollable page and allows you to click 'Next' for the subsequent page of results... and so on, until all of the matching items are returned. Full-Archive Search works in a similar way, responding with a subset of Tweets, with the ability to paginate for more Tweets as needed."
+"Full-Archive Search (FAS) delivers matched Tweets in a manner analogous to Google Search. Full-Archive Search... responds with a subset of Tweets, with the ability to paginate for more Tweets as needed."
 
 As of April, 2015, 'firehose' access is cut off for all third-party resellers. Now it all goes through Gnip, which was acquired by Twitter in May, 2014. ([1](http://www.forbes.com/sites/benkepes/2015/04/11/how-to-kill-your-ecosystem-twitter-pulls-an-evil-move-with-its-firehose/), [2](http://thenextweb.com/dd/2015/04/11/twitter-cuts-off-firehose-resellers-as-it-brings-data-access-fully-in-house/), [3](http://www.infoworld.com/article/2908869/big-data/twitters-firehose-shut-off-is-the-newest-hazard-of-the-api-economy.html))
 
@@ -425,18 +427,10 @@ layout: true
 
 ???
 
+The five multiple casualty events of interest included the Boston Bombing, San Francisco Asiana 214 Plane Crash, Napa Earthquake, Sandy Hook Elementary School shooting, and Marysville School Shooting. Relevant tweets posted on the day of the event and in the six days thereafter (for seven days total per event) were identified using the incident time of each event (as displayed here).
 
 https://www.calhospital.org/sites/main/files/file-attachments/napa_earthquake_presentation_2up.pdf
 http://www.heraldnet.com/news/marysville-pilchuck-high-school-shootings-timeline/
-
-
-Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
-
-Using disaster specific search terms, all relevant tweets from the event to 7 days post-event were analyzed for 5 recent US based multiple casualty events. Quantitative and qualitative analysis of tweet utilization were compared across events.
-
-Tweets relating to five recent U.S. multiple casualty events were acquired post hoc from Twitter via Gnip's Historical PowerTrack (http://support.gnip.com/apis/historical_api/). All data was purchased from the Twitter Corporation. The tweet content including the text of the tweet, user information, geocoding of the tweet, structure of the tweet, number of each user's followers, retweet counts, and timing of the tweets were supplied. The five multiple casualty events of interest included the Boston Bombing, San Francisco Asiana 214 Plane Crash, Napa Earthquake, Sandy Hook Elementary School shooting, and Marysville School Shooting. Relevant tweets posted on the day of the event and in the six days thereafter (for seven days total per event) were identified using the incident time of each event (as displayed here).
-
-Historical Power Track. Accessed November 2015. http://support.gnip.com/apis/historical_api/
 
 ---
 
@@ -451,6 +445,10 @@ Historical Power Track. Accessed November 2015. http://support.gnip.com/apis/his
     - user information (such as # of followers)
     - geocoding (when available/provided)
     - retweet/quote tweet info
+
+???
+
+Tweets relating to these recent U.S. multiple casualty events were acquired post hoc from Twitter via Gnip's Historical PowerTrack. All data was purchased from Twitter. The tweet content including the text of the tweet, user information, geocoding of the tweet, structure of the tweet, number of each user's followers, retweet counts, and timing of the tweets were supplied.
 
 ---
 
@@ -473,9 +471,7 @@ Disaster Event                                    | Search Terms
 
 ???
 
-Tweets were identified using disaster-specific filtering rules. Where more than one text pattern was listed for a given event, a tweet was included if it matched on either (or both). Filtering was performed via a case-insensitive keyword search where individual keywords were separated by boolean operators. A space denotes an 'and' operator, an uppercase 'OR' denotes an 'or' operator, and this logic is combined using parentheses to group clauses. Quotation marks indicate terms which should be matched exactly (not tokenized) (http://support.gnip.com/apis/powertrack/rules.html).
-
-Tweet data was packaged as a collection of compressed JSON files, each containing tweets from one 10 minute span of a single event's seven day collection period. Data within these JSON files was imported and cleaned using R with package jsonlite and subsequently summarized and visualized using ggplot2. Any tweets posted prior to their respective event's time were excluded from the analytic sample.
+Tweets were identified using disaster-specific filtering rules. Where more than one text pattern was listed for a given event, a tweet was included if it matched on either (or both). Filtering was performed via a case-insensitive keyword search where individual keywords were separated by boolean operators. A space denotes an 'and' operator, an uppercase 'OR' denotes an 'or' operator, and this logic is combined using parentheses to group clauses. Quotation marks indicate terms which should be matched exactly (not tokenized).
 
 <!--
 
@@ -487,10 +483,6 @@ Tweet data was packaged as a collection of compressed JSON files, each containin
     - County disaster notification time (if a county disaster page was activated)
     - Hospital stand by notification times (if no county disaster page was performed)
     - Patient arrival times (obtained from after action reports).
-
-???
-
-Quantitative and qualitative analysis were performed to identify similarities across events and the timing of differing tweet per minute thresholds were compared to the county disaster signal for each event. Numerical summaries of interest were computed, including mean followers per user, proportion of collected tweets that were retweets, and maximum tweet-per-minute volume. To better structure visualizations for qualitative identification of common event 'signatures,' tweets meeting all criteria described above were summarized into tweets per minute during the first twelve hours after the event onset. The speed with which tweet volume reached a threshold and/or peak was compared to the timing of the traditional county disaster signal for each event. For multiple casualty events that require the resources beyond normal functioning, county governments in conjunction with local official coordinate disaster wide responses involving multiple jurisdictions and hospital systems. Each of the events utilized in this report generated a detailed after action report that produced by the responsible governing body. These reports can include detailed information on timing of the initial event, first EMS calls, hospital standby notification, and county wide disaster activation (if activated). Not all 'after action' reports report all metrics. These after action reports are considered the official documentation of the time line of the events and therefore, we utilized the metrics available in each report. To compare the speed with which tweets accumulated across events, the cumulative tweet volume in the first 60 minutes after each event's onset was also computed.
 
 -->
 
@@ -561,14 +553,10 @@ twitter_entities.hashtags.combo = sapply(twitterEventInfo$shortName,
 
 ???
 
-A mostly qualitative analysis was performed to identify similarities across events and the timing of differing tweet per minute thresholds were compared to the county disaster signal for each event. Numerical summaries of interest were computed, including mean followers per user, proportion of collected tweets that were retweets, and maximum tweet-per-minute volume. To better structure visualizations for qualitative identification of common event 'signatures,' tweets meeting all criteria described above were summarized into tweets per minute during the first twelve hours after the event onset. The speed with which tweet volume reached a threshold and/or peak was compared to the timing of the traditional county disaster signal for each event. For multiple casualty events that require the resources beyond normal functioning, county governments in conjunction with local official coordinate disaster wide responses involving multiple jurisdictions and hospital systems. Each of the events utilized in this report generated a detailed after action report that produced by the responsible governing body. These reports can include detailed information on timing of the initial event, first EMS calls, hospital standby notification, and county wide disaster activation (if activated). Not all 'after action' reports report all metrics. These after action reports are considered the official documentation of the time line of the events and therefore, we utilized the metrics available in each report. To compare the speed with which tweets accumulated across events, the cumulative tweet volume in the first 60 minutes after each event's onset was also computed.
 
-Over 3.8 million tweets were analyzed (SH 1.8m, BB 1.1m, SF 430k, MV 250k, NE 205k). Peak tweets per min ranged from 209-3326. The mean followers per tweeter ranged from 3382-9992 across events. Retweets were tweeted a mean of 82-564 times per event. Tweets occurred very rapidly for all events (<2 mins) and represented 1% of the total event specific tweets in a median of 13 minutes of the first 911 calls.
+Tweet data was packaged as a collection of compressed JSON files, each containing tweets from one 10 minute span of a single event's seven day collection period. Data within these JSON files was imported and cleaned using R with package jsonlite. Any tweets posted prior to their respective event's time were excluded from the analytic sample. One observation corresponds to one tweet (or retweet).
 
-For the 5 recent U.S. multiple casualty events, over 3.8 million study tweets were analyzed including a per-event tweet count as shown. The distribution of tweets included unique tweets in 45% of postings and the remaining 55% were retweets or reposting of prior tweets. Retweets were tweeted a mean of 82-564 times per event. The mean followers of the person originating a tweet were ranged from 3382-9992 across events.
-
-
-
+Over 3.8 million tweets were analyzed in total. Tweets occurred very rapidly for all events (<2 mins) and represented 1% of the total event specific tweets in a median of 13 minutes of the first 911 calls. The distribution of tweets included unique tweets in 42-53% of postings and the remaining 47-58% were retweets or reposting of prior tweets. The median followers of the person originating a tweet ranged from 226 to 417 across events.
 
 ---
 layout: false
@@ -819,6 +807,51 @@ p.sfo + makeVLineAnnotation(eventMetadata$localTime + minutes(33),
   label = "Disaster Page", color = "darkgreen", vjust = 1.5, alpha.line = 0.6, alpha.label = 0.8)
 ```
 
+???
+
+To better structure visualizations for qualitative identification of common event 'signatures,' tweets were summarized into tweets per minute during the first twelve hours after the event onset. The speed with which tweet volume reached a threshold and/or peak was compared to the timing of the traditional county disaster signal for each event.
+
+For multiple casualty events that require the resources beyond normal functioning, county governments in conjunction with local official coordinate disaster wide responses involving multiple jurisdictions and hospital systems. Each of the events utilized in this report generated a detailed after action report that produced by the responsible governing body. These reports can include detailed information on timing of the initial event, first EMS calls, hospital standby notification, and county wide disaster activation (if activated). Not all 'after action' reports report all metrics. These after action reports are considered the official documentation of the time line of the events and therefore, we utilized the metrics available in each report. 
+
+---
+class: fullscreen, middle, center
+
+[
+```{r tweetspermin_lineplot3, message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
+i = 3
+
+makeTweetsPerMinLinePlot(tweetsPerMinAll[[twitterEventInfo[i, "shortName"]]],
+                         twitterEventInfo[i,])
+```
+](tweetspermin_dygraph3.html)
+
+```{r dygraph_tweetspermin3, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+
+i = 3
+eventMetadata = twitterEventInfo[i,]
+eventName = eventMetadata$shortName
+tweets.per.min.xts = xts::xts(tweetsPerMinAll[[eventName]][,-which(colnames(tweetsPerMinAll[[eventName]])=="created_at"), drop = FALSE],
+    order.by = tweetsPerMinAll[[eventName]][,"created_at"],
+    tzone = eventMetadata$scalesTZ)
+
+p = dygraph(tweets.per.min.xts,
+    main = paste(eventMetadata$longName, "Tweets passing filter(s) after event", sep = ": "),
+    ylab = "Number of tweets per minute") %>%
+    dyAxis("x", drawGrid = FALSE,
+        label = paste0("Posted time (", eventMetadata$shortTZ, " time zone)"),
+        rangePad = 1) %>%
+    dyRangeSelector(dateWindow = c(eventMetadata$localTime - minutes(10), eventMetadata$localTime + hours(12))) %>%
+    dyHighlight(highlightSeriesOpts = list(strokeWidth = 1.5),
+        highlightCircleSize = 3,
+        highlightSeriesBackgroundAlpha = 0.8) %>%
+    dyEvent(eventMetadata$localTime, "Event", labelLoc = "top") %>% # labelLoc = "bottom"
+    dyOptions(includeZero = TRUE, useDataTimezone = TRUE,
+        fillGraph = TRUE, fillAlpha = 0.3, colors = "#3B7EA1") %>% # founder's rock
+    dyLegend(show = "always", hideOnMouseOut = FALSE)
+
+htmlwidgets::saveWidget(p, "tweetspermin_dygraph3.html")
+```
+
 ---
 class: fullscreen, middle, center
 
@@ -946,45 +979,6 @@ htmlwidgets::saveWidget(p, "tweetspermin_dygraph4.html")
 
 The tweet graphic signatures were consistent across disasters except SH which had similar signature but, delayed signal initiation.
 
----
-class: fullscreen, middle, center
-
-[
-```{r tweetspermin_lineplot3, message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
-i = 3
-
-makeTweetsPerMinLinePlot(tweetsPerMinAll[[twitterEventInfo[i, "shortName"]]],
-                         twitterEventInfo[i,])
-```
-](tweetspermin_dygraph3.html)
-
-```{r dygraph_tweetspermin3, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
-
-i = 3
-eventMetadata = twitterEventInfo[i,]
-eventName = eventMetadata$shortName
-tweets.per.min.xts = xts::xts(tweetsPerMinAll[[eventName]][,-which(colnames(tweetsPerMinAll[[eventName]])=="created_at"), drop = FALSE],
-    order.by = tweetsPerMinAll[[eventName]][,"created_at"],
-    tzone = eventMetadata$scalesTZ)
-
-p = dygraph(tweets.per.min.xts,
-    main = paste(eventMetadata$longName, "Tweets passing filter(s) after event", sep = ": "),
-    ylab = "Number of tweets per minute") %>%
-    dyAxis("x", drawGrid = FALSE,
-        label = paste0("Posted time (", eventMetadata$shortTZ, " time zone)"),
-        rangePad = 1) %>%
-    dyRangeSelector(dateWindow = c(eventMetadata$localTime - minutes(10), eventMetadata$localTime + hours(12))) %>%
-    dyHighlight(highlightSeriesOpts = list(strokeWidth = 1.5),
-        highlightCircleSize = 3,
-        highlightSeriesBackgroundAlpha = 0.8) %>%
-    dyEvent(eventMetadata$localTime, "Event", labelLoc = "top") %>% # labelLoc = "bottom"
-    dyOptions(includeZero = TRUE, useDataTimezone = TRUE,
-        fillGraph = TRUE, fillAlpha = 0.3, colors = "#3B7EA1") %>% # founder's rock
-    dyLegend(show = "always", hideOnMouseOut = FALSE)
-
-htmlwidgets::saveWidget(p, "tweetspermin_dygraph3.html")
-```
-
 
 
 ---
@@ -1083,6 +1077,10 @@ ggplot(all.events.tweets.per.min.1hr,
     theme(plot.title = element_text(hjust = 0.5)) +
   guides(colour = guide_legend(override.aes = list(size=3), nrow = 2))
 ```
+
+???
+
+To compare the speed with which tweets accumulated across events, the cumulative tweet volume in the first 60 minutes after each event's onset was also computed.
 
 ---
 
@@ -1676,6 +1674,16 @@ While promising in concept, the data presented in this paper can not be used to 
 Although there are no standard approaches adopted widespread for the use of social media platforms for disaster planning and notification, there are many potential advantages to social media over traditional resources for communication of initial information in disaster times. Social media is inexpensive, rapidly disseminated, allows 2 way communication, scalable through 'retweets,' and not dependent upon a traditional power grid. In fact, there have been several worldwide incidences that have cited Twitter as the only source of communication available when other traditional communications have failed. In contrast, traditional media sources filter the message, are only one-way communication, have a slower dissemination, lack the same scalability, are dependent upon the power grid, and exclude geographically remote areas. Further, standard communication systems have failed in a number of recent events including the Taiwan typhoon in 2009, 2010 Haiti earthquake, and alternative communication sources including Twitter were relied upon heavily in the 2011 Egyptian uprising. Merchant et al. note that social media has great potential to increase 'our ability to prepare for, respond to, and recover from events that threaten the public's health.'
 
 These social media tools coupled with advanced analytics have great promise for further development of prospective early warning disaster signals, but they also present a number of limitations. To be most effective, the signals need to be geographically specific and thus, would require some customization. In contrast, the search terms the signals are built from as demonstrated by our Super Bowl test of the signal can be useful even if they are quite generic. Events that occur in more remote geographic areas that lack access to internet would be less likely to be sensitive to a signal built on social media activity. Further, there is differential use of social media across differing age groups, socioeconomic statuses, and geographically. Finally, infrastructure disruption in wide spread disasters may limit the use of social media and responding agencies must have access to social media for this tool to be effective. Each of these could limit the applicability of these types of warnings.
+
+
+---
+
+# Future work
+
+* Retrospective collection of Twitter data on MCI(s) using refined/generic search terms
+    - Las Vegas?
+* NLP/sentiment analysis of tweet text
+* Real-time 'dashboard'
 
 ---
 
